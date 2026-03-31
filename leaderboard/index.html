@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard Divisi</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+            --text: #ffffff;
+            --accent: #00aaff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at top, #1a1a1a 0%, #000000 100%);
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            margin-top: 20px;
+        }
+
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(45deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: #aaa; font-size: 1rem; }
+            
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        
+        th {
+            background-color: #252525;
+            padding: 15px;
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td { padding: 15px; border-bottom: 1px solid #333; font-size: 1.1rem; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: rgba(255,255,255,0.05); }
+
+        /* === RANKING STYLES === */
+        .rank-col { width: 60px; text-align: center; font-weight: bold; }
+        .name-col { font-weight: 600; }
+        
+        .stat-main { color: var(--accent); font-weight: 700; font-size: 1.2rem; text-align: center; }
+        .stat-sub { color: #777; font-size: 0.9rem; text-align: center; }
+
+        /* Top 3 Gradients */
+        .rank-1 { background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), transparent); border-left: 4px solid var(--gold); }
+        .rank-2 { background: linear-gradient(90deg, rgba(192, 192, 192, 0.1), transparent); border-left: 4px solid var(--silver); }
+        .rank-3 { background: linear-gradient(90deg, rgba(205, 127, 50, 0.1), transparent); border-left: 4px solid var(--bronze); }
+
+        .medal { font-size: 1.5rem; }
+
+        /* === LOADING & ERROR === */
+        #loading, #error { text-align: center; padding: 40px; color: #aaa; }
+        .spinner {
+            width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1);
+            border-left-color: var(--accent); border-radius: 50%;
+            animation: spin 1s linear infinite; margin: 0 auto 15px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 15px; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .medal { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🏆 Leaderboard Divisi</h1>
+            <p class="subtitle">Real-time Update Data Penjualan</p>
+            <p style="margin-top: 5px; font-size: 0.8em; color: #555;">Last Updated: <span id="last-updated">-</span></p>
+        </header>
+
+        <div class="table-wrapper">
+            <div id="loading">
+                <div class="spinner"></div>
+                <p>Mengambil data dari server...</p>
+            </div>
+            <div id="error" style="display: none;">
+                <p style="color: #ff4d4d;">Gagal memuat data.</p>
+            </div>
+
+            <table id="leaderboard-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th class="rank-col">#</th>
+                        <th>Referral Team</th>
+                        <th style="text-align: center;">👕 Jersey/Kaos</th>
+                        <th style="text-align: center;">✨ Sticker/Keychain</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ===========================================================
+        // KONFIGURASI URL GOOGLE APPS SCRIPT (BACKEND)
+        // ===========================================================
+        // GANTI URL DI BAWAH INI DENGAN URL WEB APP SCRIPT KAMU
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz....CONTOH_URL_KAMU...../exec'; 
+        // ===========================================================
+
+        // Definisi Isi Bundle untuk Konversi
+        const BUNDLE_CONTENTS = {
+            "Bundle of Blessings": { kaos: 3, dryfit: 0, merch: 0 },
+            "Santa’s Safe Haven": { kaos: 1, dryfit: 1, merch: 0 },
+            "A December to Remember": { kaos: 1, dryfit: 1, merch: 2 }, // 1 stiker + 1 keychain
+            "Mistletoe Mavericks": { kaos: 0, dryfit: 3, merch: 0 }
+        };
+
+        // Daftar Kode Referral Valid
+        const REFERRAL_CODES = [
+            "Lion", "Peacock", "Camel", "Owl", 
+            "Elephant", "Dove", "Ox", "Deer"
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchData();
+        });
+
+        async function fetchData() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const tableEl = document.getElementById('leaderboard-table');
+            const tableBody = document.getElementById('table-body');
+            const lastUpdatedEl = document.getElementById('last-updated');
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL);
+                if (!response.ok) throw new Error("Network Error");
+                
+                const data = await response.json();
+                
+                // Proses Data
+                const leaderboardData = processData(data);
+                
+                // Render Data
+                renderTable(leaderboardData, tableBody);
+                
+                // Update UI
+                loadingEl.style.display = 'none';
+                tableEl.style.display = 'table';
+                
+                const now = new Date();
+                lastUpdatedEl.innerText = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+            } catch (err) {
+                console.error(err);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
+                errorEl.innerHTML += `<br><small>${err.message}</small>`;
+            }
+        }
+
+        function processData(orders) {
+            // 1. Inisialisasi object statistik
+            const stats = {};
+            REFERRAL_CODES.forEach(code => {
+                stats[code] = { main: 0, sub: 0 }; 
+            });
+
+            // 2. Loop data order
+            orders.forEach(order => {
+                // Normalisasi kode referral (case insensitive)
+                const code = REFERRAL_CODES.find(c => c.toLowerCase() === (order.referralCode || "").trim().toLowerCase());
+                
+                if (code) {
+                    // Parse Items String
+                    // Format: "Nama Barang (xJumlah), Nama Barang 2 (xJumlah)"
+                    const items = order.itemsString.split('\n').join(',').split(',');
+                    
+                    items.forEach(itemStr => {
+                        itemStr = itemStr.trim();
+                        if (!itemStr) return;
+
+                        // Ambil qty dengan Regex
+                        let qty = 1;
+                        const qtyMatch = itemStr.match(/\(x(\d+)\)/);
+                        if (qtyMatch) qty = parseInt(qtyMatch[1]);
+
+                        // Ambil nama produk (hapus bagian (x..))
+                        let productName = itemStr.split(' (x')[0].trim(); 
+
+                        // LOGIKA POIN
+                        if (BUNDLE_CONTENTS[productName]) {
+                            const isi = BUNDLE_CONTENTS[productName];
+                            stats[code].main += (isi.kaos + isi.dryfit) * qty;
+                            stats[code].sub += (isi.merch) * qty;
+                        } 
+                        else if (productName.includes('Kaos') || productName.includes('Dryfit')) {
+                            stats[code].main += qty;
+                        }
+                        else if (productName.includes('Stiker') || productName.includes('Keychain')) {
+                            stats[code].sub += qty;
+                        }
+                    });
+                }
+            });
+
+            // 3. Sort (Terbanyak Main, lalu Sub)
+            return Object.keys(stats)
+                .map(code => ({ code, ...stats[code] }))
+                .sort((a, b) => {
+                    if (b.main !== a.main) return b.main - a.main;
+                    return b.sub - a.sub;
+                });
+        }
+
+        function renderTable(data, tbody) {
+            tbody.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const rank = index + 1;
+                const tr = document.createElement('tr');
+                
+                // Tambahkan class khusus untuk Top 3
+                let rankIcon = `#${rank}`;
+                if (rank === 1) { tr.classList.add('rank-1'); rankIcon = '<span class="medal">🥇</span>'; }
+                if (rank === 2) { tr.classList.add('rank-2'); rankIcon = '<span class="medal">🥈</span>'; }
+                if (rank === 3) { tr.classList.add('rank-3'); rankIcon = '<span class="medal">🥉</span>'; }
+
+                tr.innerHTML = `
+                    <td class="rank-col">${rankIcon}</td>
+                    <td class="name-col">${item.code}</td>
+                    <td><div class="stat-main">${item.main}</div></td>
+                    <td><div class="stat-sub">${item.sub}</div></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>

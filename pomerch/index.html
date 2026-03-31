@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PO Merch - Ark of Grace</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="icon" href="pomerch/images/logo.png" type="image/png">
+</head>
+<body>
+    
+    <div class="pastel-blobs">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-orange"></div>
+    </div>
+
+    <div class="container">
+        <header class="header-bar">
+            <div class="header-left">
+                <img src="pomerch/images/logo.png" alt="Logo Merch" class="header-logo">
+                <div>
+                    <h1>Restored By God</h1>
+                    <span class="subtitle">Exclusive Merchandise</span>
+                </div>
+            </div>
+            <button id="cart-icon-button" class="cart-btn-bright">
+                <span class="cart-icon">🛒</span> 
+                <span class="cart-text">Keranjang</span> 
+                <span class="badge-count" id="cart-count">0</span>
+            </button>
+        </header>
+
+        <div id="countdown-container" class="countdown-widget">
+            <p>PRE-ORDER CLOSED IN :</p>
+            <div class="countdown-timer">
+                <div class="time-block"><span id="days">00</span><small>DAYS</small></div>
+                <div class="time-separator">:</div>
+                <div class="time-block"><span id="hours">00</span><small>HOURS</small></div>
+                <div class="time-separator">:</div>
+                <div class="time-block"><span id="minutes">00</span><small>MINUTES</small></div>
+                <div class="time-separator">:</div>
+                <div class="time-block"><span id="seconds">00</span><small>SECONDS</small></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Our Collection</h2>
+        
+        <div id="product-list">
+            <div class="product-card" data-product="Kaos">
+                <div class="img-wrapper"><img src="pomerch/images/kaos/kaos-preview.png" alt="Kaos"></div>
+                <div class="product-info">
+                    <h3>Kaos</h3>
+                    <div class="price">Rp 95.000</div>
+                    <button class="action-button">Pilih Desain</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="Dryfit">
+                <div class="img-wrapper"><img src="pomerch/images/dryfit/dryfit-preview.png" alt="Dryfit"></div>
+                <div class="product-info">
+                    <h3>Dryfit</h3>
+                    <div class="price">Rp 92.000</div>
+                    <button class="action-button">Pilih Desain</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="Stiker">
+                <div class="img-wrapper"><img src="pomerch/images/stiker/sticker-preview.png" alt="Stiker Pack"></div>
+                <div class="product-info">
+                    <h3>Sticker</h3>
+                    <div class="price">Rp 5.000</div>
+                    <button class="action-button">Pilih Model</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="Keychain">
+                <div class="img-wrapper"><img src="pomerch/images/keychain/keychain-preview.png" alt="Keychain"></div>
+                <div class="product-info">
+                    <h3>Keychain</h3>
+                    <div class="price">Rp 8.000</div>
+                    <button class="action-button">Pilih Model</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-product="Santa’s Safe Haven">
+                <div class="img-wrapper"><img src="pomerch/images/santasafeheaven.png" alt="Santa’s Safe Haven"></div>
+                <div class="product-info">
+                    <h3>Santa’s Safe Haven</h3>
+                    <div class="price">Rp 182.000</div>
+                    <button class="action-button">Pilih Bundle</button>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="A December to Remember">
+                <div class="img-wrapper"><img src="pomerch/images/decembertoremember.png" alt="A December to Remember"></div>
+                <div class="product-info">
+                    <h3>A December to Remember</h3>
+                    <div class="price">Rp 195.000</div>
+                    <button class="action-button">Pilih Bundle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="multi-step-modal" class="modal-overlay">
+         <div class="modal-content">
+            <button id="close-modal-button" class="close-modal-button">&times;</button>
+            <button id="modal-back-button" class="modal-back-button">← Kembali</button>
+            
+            <h2 id="modal-title" class="title-bright">Pilih Produk</h2>
+
+            <div class="modal-step" data-step="1">
+                <h3 id="step-1-title">Pilih Desain</h3>
+                <div class="design-grid" id="design-grid-container"></div>
+            </div>
+            
+            <div class="modal-step" data-step="2">
+                <h3 id="step-2-title">Detail Pesanan</h3>
+                <img id="size-chart-image" alt="Size Chart" class="size-chart">
+                
+                <div class="options-container" id="size-options-container">
+                    <strong>Pilih Ukuran:</strong>
+                    <div class="size-selector" id="size-selector"></div>
+                </div>
+
+                <div class="options-container" id="model-options-container">
+                    <strong>Pilih Model:</strong>
+                    <div class="model-selector" id="model-selector"></div>
+                </div>
+
+                <div class="options-container" id="bundle-options-container"></div>
+
+                <div class="modal-footer">
+                    <div class="modal-quantity-wrapper">
+                        <strong>Jumlah:</strong>
+                        <div class="modal-quantity-controls">
+                            <button id="modal-qty-down">-</button>
+                            <input type="number" id="modal-qty-input" value="1" min="1" readonly>
+                            <button id="modal-qty-up">+</button>
+                        </div>
+                    </div>
+                    
+                    <button id="add-to-cart-button" class="action-button glow-btn-pastel">Tambah ke Keranjang</button>
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <div id="cart-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-cart-modal" class="close-modal-button">&times;</button>
+            <button id="cart-back-button" class="modal-back-button" style="display: none;">← Kembali</button>
+            
+            <h2 id="cart-modal-title" class="title-bright">🛒 Keranjang Belanja</h2>
+            
+            <div id="cart-step-1" class="cart-step active">
+                <div id="modal-cart-items"></div>
+                
+                <div class="checkout-section">
+                    <div class="cart-total-box">
+                        <span>Total Pembayaran</span>
+                        <h3 id="modal-cart-total">Rp 0</h3>
+                    </div>
+                    <button id="btn-next-to-form" class="action-button glow-btn-pastel checkout-btn">Lanjut Isi Data Diri ➔</button>
+                </div>
+            </div>
+
+            <div id="cart-step-2" class="cart-step">
+                <div class="checkout-section" style="border-top: none; padding-top: 0;">
+                    <div class="form-group">
+                        <label style="font-family: var(--font-titles); color: var(--text-on-light); display: block; margin-bottom: 15px; font-size: 1.2em; text-transform: uppercase;">📝 Data Pemesan</label>
+                        <input type="text" id="customer-name" placeholder="Masukin Nama Lengkap Kamu..." required>
+                        <input type="text" id="customer-phone" placeholder="Nomor WhatsApp Aktif (Mulai 08...)" required>
+                        <select id="customer-class" required>
+                            <option value="" disabled selected>— Pilih Kelas Kamu —</option>
+                            <option value="PPTI 20">PPTI 20</option>
+                            <option value="PPTI 21">PPTI 21</option>
+                            <option value="PPTI 22">PPTI 22</option>
+                            <option value="PPTI 23">PPTI 23</option>
+                            <option value="PPTI 24">PPTI 24</option>
+                            <option value="PPTI 24">PPTI 25</option>
+                            <option value="PPBP 7">PPBP 7</option>
+                            <option value="PPBP 8">PPBP 8</option>
+                            <option value="PPBP 9">PPBP 9</option>
+                            <option value="PPBP 10">PPBP 10</option>
+                        </select>
+                    </div>
+                    
+                    <div class="autocomplete-wrapper">
+                        <input type="text" id="customer-referral" placeholder="Kode Referral (Kalau Ada, Boleh Diisi)" autocomplete="off">
+                        <div id="referral-suggestions" class="suggestions-list"></div>
+                    </div>
+                    
+                    <button id="checkout-button" class="action-button success-btn checkout-btn">Proses Pesanan Sekarang!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alert-modal" class="modal-overlay"> 
+        <div class="modal-content text-center mini-modal">
+            <div class="icon-warning">⚠️</div>
+            <h2>Peringatan Penting!</h2>
+            <p>Pastikan kamu mentransfer <strong>jumlah yang sama persis</strong> hingga 3 digit terakhir untuk verifikasi otomatis.</p>
+            <div class="amount-highlight">
+                <p>Total Tagihan:</p>
+                <h3 id="alert-amount">Rp 0</h3>
+            </div>
+            <button id="alert-ok-button" class="action-button glow-btn-pastel">Saya Mengerti</button>
+        </div>
+    </div>
+
+    <div id="qris-modal" class="modal-overlay"> 
+        <div class="modal-content text-center mini-modal">
+             <button id="close-qris-modal-button" class="close-modal-button">&times;</button>
+             <h2 class="title-bright">Selesaikan Pembayaran</h2>
+             <h2 id="qris-amount" class="qris-amount-display">Rp 0</h2>
+             <p class="order-id-badge">Order ID: <b id="qris-order-id"></b></p>
+             
+             <div class="qris-wrapper">
+                <div id="qris-image-container"></div>
+                <p class="scan-text">Scan menggunakan M-Banking / E-Wallet</p>
+             </div>
+             
+             <button id="confirm-payment-modal-button" class="action-button success-btn">Saya Sudah Bayar</button>
+        </div>
+    </div>
+
+    <div id="validation-modal" class="modal-overlay"> 
+        <div class="modal-content text-center mini-modal">
+             <button id="close-validation-modal-button" class="close-modal-button">&times;</button>
+             <div class="icon-error">❌</div>
+             <h2>Data Belum Lengkap</h2>
+             <p id="validation-message"></p>
+             <button id="validation-ok-button" class="action-button">Kembali</button>
+        </div>
+    </div>
+    
+    <div id="toast-notification" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="app.js"></script> 
+</body>
+</html>
