@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const REFERRAL_CODES = ["Love", "Faithfull", "Patience", "Joy", "Kindness", "Peace", "Goodness"];
 
     const KAOS_DESIGNS = [
-        { name: "You're doing just fine", image: "pomerch/images/kaos/justfine.png" }, 
+        { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
         { name: "Sail Past the Storms", image: "pomerch/images/kaos/Sail past the storms.jpg" },
         { name: "Sail on Moonlit Night", image: "pomerch/images/kaos/moonlit night.png" },
         { name: "Reality Club", image: "pomerch/images/kaos/Reality Club.jpg" },
