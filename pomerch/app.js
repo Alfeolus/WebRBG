@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentOrderData = null; 
     let currentSelection = { product: null, basePrice: 0, type: 'satuan', design: null, size: null, bundleOptions: [] };
     
-    const REFERRAL_CODES = ["Lion", "Peacock", "Camel", "Owl", "Elephant", "Dove", "Ox", "Deer"];
+    const REFERRAL_CODES = ["Love", "Faithfull", "Patience", "Joy", "Kindness", "Peace", "Goodness"];
 
     const KAOS_DESIGNS = [
         { name: "You're doing just fine", image: "pomerch/images/kaos/justfine.png" }, 
