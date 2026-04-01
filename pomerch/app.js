@@ -41,13 +41,13 @@ function renderQrCode(qrisString, amount) {
 
         // Tambahkan Teks Instruksi
         ctx.fillStyle = "#0F172A"; // Warna Slate Dark
-        ctx.font = "bold 40px Montserrat, Arial";
+        ctx.font = "bold 40px Arial";
         ctx.textAlign = "center";
         ctx.fillText("TRANSFER SESUAI NOMINAL:", mainCanvas.width / 2, 860);
         
         // Tambahkan Angka Nominal Besar & Merah
         ctx.fillStyle = "#EF4444"; 
-        ctx.font = "900 75px Montserrat, Arial";
+        ctx.font = "900 75px Arial";
         ctx.fillText(formatRupiah(amount), mainCanvas.width / 2, 950);
 
         // Tampilkan hasil ke layar pembeli
