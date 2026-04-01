@@ -216,7 +216,7 @@ body {
 .amount-highlight { background: var(--bg-elevated); padding: 25px; border-radius: 20px; margin: 30px 0; border: var(--border-thick); }
 .amount-highlight h3 { font-family: var(--font-titles); font-size: 2.2em; color: #000; margin: 0; font-weight: 900; }
 .qris-amount-display { font-family: var(--font-titles); font-size: 2.5em; color: #000; margin: 20px 0 8px 0; font-weight: 900; }
-.order-id-badge { display: inline-block; background: var(--bg-elevated); padding: 6px 18px; border-radius: 20px; font-size: 0.9em; margin-bottom: 30px; font-weight: 700; border: var(--border-thick); }
+.order-id-badge { color:black;display: inline-block; background: var(--bg-elevated); padding: 6px 18px; border-radius: 20px; font-size: 0.9em; margin-bottom: 30px; font-weight: 700; border: var(--border-thick); }
 
 .qris-wrapper { background: white; padding: 25px; border-radius: 24px; display: inline-block; margin-bottom: 30px; box-shadow: 12px 12px 0 rgba(0,0,0,0.06); border: var(--border-thick); }
 #qris-image-container { display: flex; justify-content: center; align-items: center; width: 260px; height: 260px; margin: 0 auto; }

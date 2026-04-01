@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Berhasil - PO Merch RBG</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+    <style>
+        :root {
+            --bg-base: #06090F; 
+            --bg-surface: #FFFFFF; 
+            --bg-elevated: #F1F5F9; 
+            --text-on-light: #0F172A; 
+            --accent-purple: #A855F7; 
+            --accent-cyan: #22D3EE; 
+            --accent-orange: #FB923C; 
+            --success: #10B981;
+            --border-thick: 3px solid #0F172A; 
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-titles: 'Montserrat', sans-serif; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: var(--font-main); 
+            background-color: var(--bg-base); 
+            color: var(--text-on-light); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            padding: 20px;
+        }
+
+        /* Latar Belakang Kartun Space Aurora */
+        .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.3; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 15s linear infinite; }
+        .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -150px; right: -150px; }
+        .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -100px; left: -150px; animation-delay: -5s; }
+        .blob-orange { background-color: var(--accent-orange); width: 400px; height: 400px; top: 40%; left: 30%; animation-delay: -10s; }
+        @keyframes blob-float { 
+            0%, 100% { transform: translateY(0) scale(1); } 
+            50% { transform: translateY(40px) scale(1.05); } 
+        }
+
+        /* Container Card */
+        .success-card {
+            background: var(--bg-surface);
+            border: var(--border-thick);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 15px 15px 0 rgba(16, 185, 129, 0.4); /* Bayangan hijau sukses */
+            position: relative;
+            z-index: 10;
+        }
+
+        .fade-in {
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Animasi Lottie */
+        dotlottie-player {
+            width: 150px;
+            height: 150px;
+            margin: -20px auto 10px auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-titles);
+            font-size: 2em;
+            color: var(--success);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1em;
+            font-weight: 600;
+            color: #64748B;
+            margin-bottom: 30px;
+        }
+
+        /* Resi / Struk Estetik */
+        .receipt-box {
+            background: var(--bg-elevated);
+            border: var(--border-thick);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: left;
+            margin-bottom: 30px;
+            box-shadow: inset 4px 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .receipt-row {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #CBD5E1;
+        }
+        .receipt-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .receipt-label {
+            font-size: 0.85em;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .receipt-value {
+            font-size: 1.1em;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .receipt-items {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #333;
+            white-space: pre-wrap; /* Biar enter/baris barunya kebaca */
+            background: rgba(168, 85, 247, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            margin-top: 10px;
+        }
+
+        /* Tombol Balik */
+        .btn-home {
+            display: inline-block;
+            background: #000;
+            color: white;
+            border: var(--border-thick);
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.15s ease;
+            width: 100%;
+            box-shadow: 4px 4px 0 rgba(16, 185, 129, 0.3);
+        }
+        .btn-home:hover {
+            background: var(--text-on-light);
+            transform: translate(-3px, -3px);
+            box-shadow: 7px 7px 0 rgba(16, 185, 129, 0.4);
+        }
+        .btn-home:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0 rgba(16, 185, 129, 0.4);
+        }
+
+        @media (max-width: 480px) {
+            .success-card { padding: 30px 20px; border-radius: 25px; }
+            h1 { font-size: 1.6em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pastel-blobs">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-orange"></div>
+    </div>
+
+    <div class="success-card fade-in">
+        <dotlottie-player 
+            src="https://lottie.host/9c282bdc-d2dc-4c55-9b2f-9cb42ce2139e/Qk4gKxgzF0.json" 
+            background="transparent" 
+            speed="1" 
+            autoplay>
+        </dotlottie-player>
+
+        <h1>Yeay! Pesanan Berhasil 🎉</h1>
+        <p class="subtitle">Terima kasih udah beli merch RBG! Pesanan kamu lagi kita proses ya.</p>
+
+        <div class="receipt-box" id="receipt-container" style="display: none;">
+            <div class="receipt-row">
+                <span class="receipt-label">Order ID</span>
+                <span class="receipt-value" id="display-order-id">RBG-XXXXXX</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">Nama Pemesan</span>
+                <span class="receipt-value" id="display-name">Nama Pembeli</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">Ringkasan Pesanan</span>
+                <div class="receipt-items" id="display-items">Barang 1x\nBarang 2x</div>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-home">Kembali ke Toko</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ambil data dari Local Storage yang dilempar oleh app.js
+            const orderDataString = localStorage.getItem('lastOrderData');
+            
+            if (orderDataString) {
+                try {
+                    const orderData = JSON.parse(orderDataString);
+                    
+                    // Masukkan ke dalam HTML
+                    document.getElementById('display-order-id').innerText = orderData.orderId || '-';
+                    document.getElementById('display-name').innerText = orderData.customerName || '-';
+                    document.getElementById('display-items').innerText = orderData.itemsString || '-';
+                    document.getElementById('receipt-container').style.display = 'block';
+
+                    // localStorage.removeItem('lastOrderData');
+                } catch (e) {
+                    console.error("Gagal membaca data pesanan:", e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
