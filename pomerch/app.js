@@ -176,28 +176,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const KAOS_DESIGNS = [
         { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
-        { name: "Sail Past the Storms", image: "pomerch/images/kaos/Sail past the storms.jpg" },
-        { name: "Sail on Moonlit Night", image: "pomerch/images/kaos/moonlit night.png" },
-        { name: "Reality Club", image: "pomerch/images/kaos/Reality Club.jpg" },
-        { name: "Mclaren", image: "pomerch/images/kaos/mclarens.png" },
-        { name: "LOVE", image: "pomerch/images/kaos/LOVE.png" },
-        { name: "LN (Blue)", image: "pomerch/images/kaos/LN.png" },
-        { name: "Lany", image: "pomerch/images/kaos/LANY.jpg" },
-        { name: "Lala Lost You", image: "pomerch/images/kaos/lala.png" },
-        { name: "Galatians Club", image: "pomerch/images/kaos/Galatians club.png" },
-        { name: "Ferrari (White)", image: "pomerch/images/kaos/Ferrari White.png" },
-        { name: "Ferrari (Black)", image: "pomerch/images/kaos/Ferrari Black.png" },
-        { name: "Charis Xapic", image: "pomerch/images/kaos/Charis Xapic.png" },
-        { name: "Capybara", image: "pomerch/images/kaos/Capybara.png" }
+        { name: "Child of God", image: "pomerch/images/kaos/Child of God.png" },
+        { name: "Courage to be Disliked", image: "pomerch/images/kaos/Courage to be Disliked.png" },
+        { name: "Faith", image: "pomerch/images/kaos/Faith.png" },
+        { name: "Galatians", image: "pomerch/images/kaos/Galatians.png" },
+        { name: "Losing Us", image: "pomerch/images/kaos/Losing Us.png" },
+        { name: "Love Your Enemies", image: "pomerch/images/kaos/Love Your Enemies.png" },
+        { name: "Magnetic Love", image: "pomerch/images/kaos/Magnetic Love.png" },
+        { name: "Matcha", image: "pomerch/images/kaos/Matcha.png" },
+        { name: "NPD", image: "pomerch/images/kaos/NPD.png" },
+        { name: "Ocean and Engine", image: "pomerch/images/kaos/Ocean and Engine.png" },
+        { name: "Risk it All", image: "pomerch/images/kaos/Risk it All.png" },
+        { name: "Style - Eyes", image: "pomerch/images/kaos/Style - Eyes.png" },
+        { name: "Style - Lips", image: "pomerch/images/kaos/Style - Lips.png" },
+        { name: "Terbuang Dalam Waktu", image: "pomerch/images/kaos/Terbuang Dalam Waktu.png" },
+        { name: "Trouble Maker - Patrick", image: "pomerch/images/kaos/Trouble Maker - Patrick.png" },
+        { name: "Trouble Maker - Spongebob", image: "pomerch/images/kaos/Trouble Maker - Spongebob.png" }
     ];
     const KAOS_SIZES = ["S", "M", "L", "XL", "XXL [+5K]"]; 
     
     const DRYFIT_DESIGNS = [
-        { name: "DBL #1", image: "pomerch/images/dryfit/dbl 2.jpg" },
-        { name: "DBL #2", image: "pomerch/images/dryfit/DBL 1.jpg" },
-        { name: "I Am Saved", image: "pomerch/images/dryfit/I am saved.jpg" },
-        { name: "Moonlit Night", image: "pomerch/images/dryfit/Moonlit Night.png" },
-        { name: "Sodapop", image: "pomerch/images/dryfit/sodapop.jpg" },
+        { name: "Badminton Therapy", image: "pomerch/images/dryfit/Badminton Therapy.png" },
+        { name: "Serve the lord", image: "pomerch/images/dryfit/Serve the lord.png" },
+        { name: "Sinchan #1", image: "pomerch/images/dryfit/Sinchan #1.png" },
+        { name: "Sincham #2", image: "pomerch/images/dryfit/Sinchan #2.png" },
+        { name: "Tennis-society", image: "pomerch/images/dryfit/Tennis society.png" },
     ];
     const DRYFIT_SIZES = ["S", "M", "L", "XL", "XXL [+5K]"]; 
     
