@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - PO Merch RBG</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     
@@ -37,7 +38,10 @@
         <main class="main-content">
             <header>
                 <h1>Ringkasan Pesanan</h1>
-                <button id="btn-refresh" class="action-btn outline">🔄 Refresh Data</button>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button id="btn-recap" class="action-btn outline" style="background: var(--accent-purple); color: white; border-color: #000;">📊 Rekap Item</button>
+                    <button id="btn-refresh" class="action-btn outline">🔄 Refresh Data</button>
+                </div>
             </header>
 
             <div class="stats-grid">
@@ -69,10 +73,19 @@
                         </tr>
                     </thead>
                     <tbody id="orders-body">
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </main>
+    </div>
+
+    <div id="recap-overlay" class="recap-overlay" style="display: none;">
+        <div class="recap-box">
+            <button id="close-recap-btn" class="close-recap-btn">&times;</button>
+            <h2>📊 Rekap Per Item (PAID)</h2>
+            <div id="recap-content" class="recap-content">
+                </div>
+        </div>
     </div>
 
     <script src="/pomerch/admin.js"></script>

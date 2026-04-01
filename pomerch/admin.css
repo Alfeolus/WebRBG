@@ -559,3 +559,57 @@ td small {
         padding: 12px;
     }
 }
+
+/* =========================================
+   8. Modal Rekap Pesanan
+   ========================================= */
+.recap-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 9999;
+    display: flex; justify-content: center; align-items: flex-start; /* flex-start agar bisa di-scroll kalau panjang */
+    backdrop-filter: blur(8px); padding-top: 5vh; overflow-y: auto;
+}
+
+.recap-box {
+    background: var(--bg-surface); border: var(--border-thick);
+    padding: 30px; border-radius: 25px;
+    box-shadow: 12px 12px 0 rgba(168, 85, 247, 0.5);
+    width: 95%; max-width: 800px; position: relative; margin-bottom: 5vh;
+}
+
+.recap-box h2 {
+    font-family: var(--font-titles); font-weight: 900;
+    text-transform: uppercase; margin-bottom: 25px;
+    color: var(--text-primary); text-align: center;
+}
+
+.close-recap-btn {
+    position: absolute; top: 20px; right: 25px;
+    background: none; border: none; font-size: 2em;
+    cursor: pointer; color: var(--text-secondary);
+    transition: 0.2s; font-weight: bold;
+}
+.close-recap-btn:hover { color: var(--danger); transform: scale(1.1); }
+
+.recap-content { max-height: 65vh; overflow-y: auto; padding-right: 10px; }
+
+.recap-item-group {
+    background: var(--bg-elevated); padding: 20px;
+    border-radius: 15px; margin-bottom: 20px; border: var(--border-thick);
+}
+
+.recap-item-group h3 {
+    color: #000; font-weight: 900; font-size: 1.1em;
+    margin-bottom: 15px; border-bottom: 2px dashed #CBD5E1; padding-bottom: 10px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+}
+
+.recap-item-group h3 .badge-qty {
+    background: var(--accent-purple); color: white;
+    padding: 4px 12px; border-radius: 12px; font-size: 0.85em; border: 2px solid #000;
+}
+
+.recap-item-group ul { list-style: none; margin: 0; padding: 0; font-size: 0.9em; line-height: 1.8; }
+.recap-item-group li { border-bottom: 1px solid rgba(0,0,0,0.05); padding: 8px 0; }
+.recap-item-group li:last-child { border-bottom: none; }
+.recap-item-group li strong { color: var(--accent-purple); font-weight: 800; font-size: 1.1em; }
