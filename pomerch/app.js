@@ -807,7 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('lastOrderData', JSON.stringify(successData));
         }
         
-        let successUrl = 'payment-success.html';
+        let successUrl = '/payment-success';
         window.location.href = successUrl;
     });
 
