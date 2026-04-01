@@ -198,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const DRYFIT_DESIGNS = [
         { name: "Badminton Therapy", image: "pomerch/images/dryfit/Badminton Therapy.png" },
         { name: "Serve the lord", image: "pomerch/images/dryfit/Serve the lord.png" },
-        { name: "Sinchan #1", image: "pomerch/images/dryfit/Sinchan #1.png" },
-        { name: "Sincham #2", image: "pomerch/images/dryfit/Sinchan #2.png" },
+        { name: "Sinchan #1", image: "pomerch/images/dryfit/Sinchan 1.png" },
+        { name: "Sinchan #2", image: "pomerch/images/dryfit/Sinchan 2.png" },
         { name: "Tennis-society", image: "pomerch/images/dryfit/Tennis society.png" },
     ];
     const DRYFIT_SIZES = ["S", "M", "L", "XL", "XXL [+5K]"]; 

@@ -112,3 +112,22 @@ select.status-dropdown:focus { border-color: var(--accent-purple); background: w
     .table-container { overflow-x: auto; }
     th, td { white-space: nowrap; }
 }
+
+/* Tombol Hapus Pesanan */
+.btn-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 2px solid var(--danger);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 800;
+    margin-top: 10px;
+    width: 100%;
+    transition: 0.2s;
+    display: block;
+}
+.btn-delete:hover {
+    background: var(--danger);
+    color: white;
+}
