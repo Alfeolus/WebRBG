@@ -7,7 +7,7 @@
     },
     {
       "source": "/adminaja",
-      "destination": "/pomerch/admin-jojo.html"
+      "destination": "pomerch/admin-jojo.html"
     }
   ]
 }
