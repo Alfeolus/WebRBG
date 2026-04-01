@@ -7,21 +7,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLogout = document.getElementById('btn-logout');
     const btnRefresh = document.getElementById('btn-refresh');
 
-    // 1. Sistem Login Sederhana (Hanya proteksi dasar di sisi klien)
-    // Ganti 'adminaog2025' dengan password rahasia kamu
-    const ADMIN_PASSWORD = "jojo123"; 
+    if (sessionStorage.getItem('isAdminActive') === 'true') {
+        loginOverlay.style.display = 'none';
+        dashboard.style.display = 'flex';
+        fetchOrders();
+    }
 
-    btnLogin.addEventListener('click', () => {
-        if (passwordInput.value === ADMIN_PASSWORD) {
-            loginOverlay.style.display = 'none';
-            dashboard.style.display = 'flex';
-            fetchOrders(); // Ambil data saat berhasil masuk
-        } else {
-            errorMsg.style.display = 'block';
+    btnLogin.addEventListener('click', async () => {
+        const enteredPassword = passwordInput.value;
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: enteredPassword })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Login Berhasil
+                loginOverlay.style.display = 'none';
+                dashboard.style.display = 'flex';
+                sessionStorage.setItem('isAdminActive', 'true');
+                fetchOrders();
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = "❌ Password Salah!";
+            }
+        } catch (error) {
+            console.error("Login Error:", error);
+            alert("Gagal terhubung ke server login.");
         }
     });
 
     btnLogout.addEventListener('click', () => {
+        sessionStorage.removeItem('isAdminActive');
         dashboard.style.display = 'none';
         loginOverlay.style.display = 'flex';
         passwordInput.value = '';
@@ -29,54 +51,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnRefresh.addEventListener('click', fetchOrders);
 
-    // 2. Mengambil Data dari Backend
     async function fetchOrders() {
         try {
-            // CATATAN: Pastikan backend kamu memiliki endpoint GET '/api/getorders'
             const response = await fetch('/api/getorders'); 
-            
             if (!response.ok) throw new Error("Gagal mengambil data");
             const data = await response.json();
             
-            // Asumsi format respon dari backend: { status: "success", orders: [...] }
             renderTable(data.orders);
             calculateStats(data.orders);
-
         } catch (error) {
             console.error(error);
-            // Contoh data statis jika server belum siap (hanya untuk testing tampilan):
-            const mockData = [
-                { id: "AOG-12345", nama: "Budi Santoso", kelas: "PPTI 20", wa: "08123456789", total: 195000, status: "paid" },
-                { id: "AOG-12346", nama: "Siti Aminah", kelas: "PPBP 7", wa: "08987654321", total: 95000, status: "pending" }
-            ];
-            renderTable(mockData);
-            calculateStats(mockData);
+            renderTable([]);
+            calculateStats([]);
         }
     }
 
-    // 3. Menampilkan Data ke Tabel
     function renderTable(orders) {
         const tbody = document.getElementById('orders-body');
         tbody.innerHTML = '';
 
         if (!orders || orders.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Belum ada pesanan</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 50px;">Belum ada pesanan yang masuk.</td></tr>';
             return;
         }
 
         orders.forEach(order => {
             const tr = document.createElement('tr');
-            
-            // Format Rupiah
             const totalRupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(order.total);
-            
-            // Link WhatsApp (Format wa.me)
             const waLink = `https://wa.me/62${order.wa.replace(/^0/, '')}`;
 
             tr.innerHTML = `
                 <td><strong>${order.id}</strong></td>
-                <td>${order.nama} <br><small style="color:#aaa;">${order.kelas}</small></td>
-                <td><a href="${waLink}" target="_blank" style="color:#00e5ff; text-decoration:none;">📱 ${order.wa}</a></td>
+                <td>${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small></td>
+                <td><a href="${waLink}" target="_blank" style="color:var(--accent-cyan); text-decoration:none; font-weight:bold;">📱 ${order.wa}</a></td>
                 <td>${totalRupiah}</td>
                 <td>
                     <span class="badge ${order.status}">${order.status.toUpperCase()}</span>
@@ -91,33 +98,31 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.appendChild(tr);
         });
 
-        // Tambahkan event listener untuk ganti status
         document.querySelectorAll('.status-dropdown').forEach(select => {
             select.addEventListener('change', (e) => updateStatus(e.target.dataset.id, e.target.value));
         });
     }
 
-    // 4. Update Status ke Backend
     async function updateStatus(orderId, newStatus) {
         try {
-            // CATATAN: Pastikan backend kamu memiliki endpoint POST '/api/updatestatus'
-            await fetch('/api/updatestatus', {
+            const response = await fetch('/api/updatestatus', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderId: orderId, status: newStatus })
             });
-            fetchOrders(); // Refresh data setelah update
+            if (response.ok) {
+                fetchOrders();
+            } else {
+                alert('Gagal mengupdate status di server.');
+            }
         } catch (error) {
-            alert('Gagal mengupdate status!');
+            alert('Terjadi kesalahan koneksi!');
         }
     }
 
-    // 5. Hitung Statistik Otomatis
     function calculateStats(orders) {
         const totalOrders = orders.length;
         const totalPending = orders.filter(o => o.status === 'pending').length;
-        
-        // Hanya hitung revenue dari pesanan yang sudah dibayar (paid)
         const totalRevenue = orders
             .filter(o => o.status === 'paid')
             .reduce((sum, order) => sum + order.total, 0);
