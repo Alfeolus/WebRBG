@@ -8,6 +8,10 @@
     {
       "source": "/adminaja",
       "destination": "/pomerch/admin-jojo.html"
+    },
+    {
+      "source": "/payment-success",
+      "destination": "/pomerch/payment-success.html"
     }
   ]
 }
