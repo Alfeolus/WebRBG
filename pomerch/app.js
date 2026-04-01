@@ -11,7 +11,7 @@ function showToast(message) {
     }, 3000); 
 }
 
-function renderQrCode(qrisString) {
+function renderQrCode(qrisString, amount) {
     const container = document.getElementById('qris-image-container');
     container.innerHTML = ''; 
     if (!qrisString) {
@@ -20,18 +20,59 @@ function renderQrCode(qrisString) {
     }
     
     try {
-        const canvas = document.createElement('canvas');
-        container.appendChild(canvas);
+        const tempCanvas = document.createElement('canvas');
         new QRious({
-            element: canvas,
+            element: tempCanvas,
             value: qrisString,
-            size: 220, 
-            padding: 10,
-            level: 'M' 
+            size: 800, 
+            level: 'H' 
         });
+
+        const mainCanvas = document.createElement('canvas');
+        const ctx = mainCanvas.getContext('2d');
+
+        mainCanvas.width = 800;
+        mainCanvas.height = 1000; 
+
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+
+        ctx.drawImage(tempCanvas, 0, 0);
+
+        // Tambahkan Teks Instruksi
+        ctx.fillStyle = "#0F172A"; // Warna Slate Dark
+        ctx.font = "bold 40px Montserrat, Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("TRANSFER SESUAI NOMINAL:", mainCanvas.width / 2, 860);
+        
+        // Tambahkan Angka Nominal Besar & Merah
+        ctx.fillStyle = "#EF4444"; 
+        ctx.font = "900 75px Montserrat, Arial";
+        ctx.fillText(formatRupiah(amount), mainCanvas.width / 2, 950);
+
+        // Tampilkan hasil ke layar pembeli
+        mainCanvas.style.width = "100%";
+        mainCanvas.style.height = "auto";
+        mainCanvas.style.border = "3px solid #000";
+        mainCanvas.style.borderRadius = "15px";
+        container.appendChild(mainCanvas);
+
+        // 3. Buat Tombol Download Otomatis di bawah gambar
+        const downloadBtn = document.createElement('button');
+        downloadBtn.innerHTML = "⬇️ DOWNLOAD GAMBAR QRIS";
+        downloadBtn.className = "action-button glow-btn-pastel";
+        downloadBtn.style.marginTop = "20px";
+        downloadBtn.onclick = () => {
+            const link = document.createElement('a');
+            link.download = `QRIS-RBG-${Date.now()}.png`;
+            link.href = mainCanvas.toDataURL("image/png");
+            link.click();
+        };
+        container.appendChild(downloadBtn);
+
     } catch (e) {
         console.error("Gagal membuat QRIS:", e);
-        container.innerHTML = '<p>Error: Gagal membuat gambar QRIS.</p>';
+        container.innerHTML = '<p>Error: Gagal memproses gambar.</p>';
     }
 }
 
@@ -781,7 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
             qrisAmountEl.textContent = formatRupiah(currentOrderData.finalAmount);
             qrisOrderIdEl.textContent = currentOrderData.orderId;
             qrisModal.style.display = 'flex';
-            renderQrCode(currentOrderData.qrisString); 
+            renderQrCode(currentOrderData.qrisString, currentOrderData.finalAmount); 
          }
 
         checkoutButton.disabled = false;

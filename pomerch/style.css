@@ -213,13 +213,13 @@ body {
 /* QRIS Modern Cartoon */
 .icon-warning { font-size: 4.5em; margin-bottom: 15px; color: var(--accent-orange); }
 .icon-error { font-size: 4.5em; margin-bottom: 15px; color: var(--danger); }
-.amount-highlight { background: var(--bg-elevated); padding: 25px; border-radius: 20px; margin: 30px 0; border: var(--border-thick); }
+.amount-highlight { background: var(--bg-elevated); padding: 25px; border-radius: 20px; margin: 30px 0; border: var(--border-thick); color: black; }
 .amount-highlight h3 { font-family: var(--font-titles); font-size: 2.2em; color: #000; margin: 0; font-weight: 900; }
 .qris-amount-display { font-family: var(--font-titles); font-size: 2.5em; color: #000; margin: 20px 0 8px 0; font-weight: 900; }
 .order-id-badge { color:black;display: inline-block; background: var(--bg-elevated); padding: 6px 18px; border-radius: 20px; font-size: 0.9em; margin-bottom: 30px; font-weight: 700; border: var(--border-thick); }
 
 .qris-wrapper { background: white; padding: 25px; border-radius: 24px; display: inline-block; margin-bottom: 30px; box-shadow: 12px 12px 0 rgba(0,0,0,0.06); border: var(--border-thick); }
-#qris-image-container { display: flex; justify-content: center; align-items: center; width: 260px; height: 260px; margin: 0 auto; }
+#qris-image-container { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 320px; margin: 0 auto;}
 #qris-image-container canvas { border-radius: 8px; width: 100% !important; height: 100% !important; }
 .scan-text { color: #333; font-weight: 800; font-size: 0.9em; margin-top: 18px; text-transform: uppercase; letter-spacing: 1px; }
 
