@@ -308,19 +308,22 @@ main h1 {
     border-radius: 20px;
     padding: 20px;
     box-shadow: var(--shadow-hard);
-    width: 100%; /* Wajib agar responsive */
+    width: 100%; 
+    overflow-x: auto; /* INI KUNCINYA: Biar kalau layar sempit, tabelnya bisa di-scroll ke samping dengan rapi */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.95em;
-    min-width: 900px; /* Mencegah kolom berimpitan di desktop */
+    font-size: 0.9em; /* Sedikit dikecilkan agar lebih muat banyak data */
+    min-width: 750px; /* Diperkecil dari 900px agar ramah di layar laptop biasa */
 }
 
 /* Mengatur lebar spesifik untuk detail pesanan di Desktop */
 th:nth-child(4), td:nth-child(4) {
-    width: 300px; /* Kasih ruang lebih */
+    width: 250px; /* Dikurangi sedikit agar menyisakan ruang untuk tombol aksi */
+    white-space: normal; 
+    word-wrap: break-word;
 }
 
 th {
