@@ -1,119 +1,396 @@
-:root {
-    /* Palette Kartun Pop Estetik yang selaras dengan index.html */
+/* =========================================
+   RBG ADMIN DASHBOARD - CARTOON POP THEME
+   (Responsive & Fix Cut-off Details)
+   ========================================= */
+
+   :root {
+    /* Color Palette */
     --bg-base: #06090F; 
     --bg-surface: #FFFFFF; 
     --bg-elevated: #F1F5F9; 
-    --text-on-dark: #FFFFFF; 
-    --text-on-light: #0F172A; 
-    --text-secondary: #64748B;
-    
+    --text-primary: #0F172A; 
+    --text-secondary: #64748B; 
     --accent-purple: #A855F7; 
     --accent-cyan: #22D3EE; 
     --accent-orange: #FB923C; 
     --success: #10B981;
     --danger: #EF4444;
     
+    /* UI Elements */
     --border-thick: 3px solid #0F172A; 
+    --shadow-hard: 8px 8px 0 rgba(15, 23, 42, 0.2);
+    
+    /* Fonts */
     --font-main: 'Plus Jakarta Sans', sans-serif;
     --font-titles: 'Montserrat', sans-serif; 
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-main); background-color: var(--bg-base); color: var(--text-on-dark); overflow: hidden; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Latar Belakang Kartun Space Aurora */
-.pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.3; }
-.blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 15s linear infinite; }
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* =========================================
+   1. Latar Belakang (Cartoon Space Aurora)
+   ========================================= */
+.pastel-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    animation: blob-float 15s linear infinite;
+}
+
 .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -150px; right: -150px; }
 .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -100px; left: -150px; animation-delay: -5s; }
 .blob-orange { background-color: var(--accent-orange); width: 400px; height: 400px; top: 40%; left: 30%; animation-delay: -10s; }
-@keyframes blob-float { 
-    0%, 100% { transform: translateY(0) scale(1); } 
-    50% { transform: translateY(40px) scale(1.05); } 
+
+@keyframes blob-float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(40px) scale(1.05); }
 }
 
-/* Login Overlay */
-.login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(8px); }
-.login-box { background: var(--bg-surface); border: var(--border-thick); padding: 50px; border-radius: 30px; text-align: center; width: 90%; max-width: 450px; box-shadow: 15px 15px 0 rgba(168, 85, 247, 0.4); }
-.login-box h2 { font-family: var(--font-titles); color: var(--accent-purple); font-size: 2.2em; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; }
-.login-box input { width: 100%; padding: 18px; margin-bottom: 25px; border-radius: 15px; border: var(--border-thick); background: var(--bg-elevated); color: var(--text-on-light); font-family: inherit; font-weight: 800; font-size: 1.05em; outline: none; transition: 0.2s; }
-.login-box input:focus { border-color: var(--accent-purple); background: var(--bg-surface); }
+/* =========================================
+   2. Login Overlay
+   ========================================= */
+.login-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(6, 9, 15, 0.95);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
 
-/* Global Buttons */
-.action-btn { background: #000; color: white; border: var(--border-thick); padding: 15px 25px; border-radius: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.15s ease; box-shadow: 4px 4px 0 rgba(255,255,255,0.1); width: 100%; }
-.action-btn:hover { background: var(--text-on-light); transform: translate(-3px, -3px); box-shadow: 7px 7px 0 rgba(255,255,255,0.1); }
-.action-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0 rgba(255,255,255,0.1); }
+.login-box {
+    background: var(--bg-surface);
+    border: var(--border-thick);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 12px 12px 0 rgba(168, 85, 247, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
 
-.action-btn.outline { background: var(--accent-cyan); color: #000; width: auto; box-shadow: 5px 5px 0 rgba(0,0,0,0.2); }
-.action-btn.outline:hover { background: #06B6D4; box-shadow: 8px 8px 0 rgba(0,0,0,0.2); }
+.login-box h2 {
+    font-family: var(--font-titles);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+}
 
-/* Layout Dashboard */
-.admin-layout { display: flex; height: 100vh; padding: 25px; gap: 25px; }
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    border: 3px solid #0F172A;
+    border-radius: 12px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 700;
+    background: var(--bg-elevated);
+    margin-bottom: 20px;
+    transition: 0.15s;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 4px 4px 0 rgba(168, 85, 247, 0.3);
+}
+
+/* =========================================
+   3. Main Admin Layout
+   ========================================= */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
 
 /* Sidebar */
-.sidebar { width: 280px; background: var(--bg-surface); border: var(--border-thick); border-radius: 30px; padding: 40px 25px; box-shadow: 10px 10px 0 rgba(34, 211, 238, 0.3); display: flex; flex-direction: column; }
-.sidebar h2 { font-family: var(--font-titles); color: var(--accent-purple); font-weight: 900; font-size: 2em; text-transform: uppercase; margin-bottom: 40px; text-align: center; line-height: 1.1; }
-.nav-menu { list-style: none; }
-.nav-menu li { padding: 18px 20px; margin-bottom: 12px; border-radius: 15px; cursor: pointer; transition: 0.2s; color: var(--text-on-light); font-weight: 800; border: 3px solid transparent; }
-.nav-menu li.active { background: var(--accent-cyan); border: var(--border-thick); color: #000; box-shadow: 4px 4px 0 rgba(0,0,0,0.15); }
-.nav-menu li:hover:not(.active) { background: var(--bg-elevated); border: var(--border-thick); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(0,0,0,0.1); }
-#btn-logout { margin-top: auto; border: var(--border-thick); background: var(--danger); color: white; text-align: center; box-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
-#btn-logout:hover { background: #B91C1C; }
-
-/* Main Content */
-.main-content { flex: 1; background: var(--bg-surface); border: var(--border-thick); border-radius: 30px; padding: 40px; overflow-y: auto; box-shadow: 12px 12px 0 rgba(168, 85, 247, 0.3); color: var(--text-on-light); }
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-header h1 { font-family: var(--font-titles); color: var(--text-on-light); font-weight: 900; font-size: 2.2em; text-transform: uppercase; letter-spacing: -1px; }
-
-/* Stats Grid */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 45px; }
-.stat-card { background: var(--bg-elevated); border: var(--border-thick); border-radius: 20px; padding: 30px; box-shadow: 6px 6px 0 rgba(0,0,0,0.1); transition: 0.2s; position: relative; overflow: hidden; }
-.stat-card:hover { transform: translateY(-5px); box-shadow: 10px 10px 0 rgba(0,0,0,0.15); }
-.stat-card h3 { font-family: var(--font-titles); font-size: 1.1em; color: var(--text-secondary); margin-bottom: 12px; font-weight: 800; text-transform: uppercase; }
-.stat-card p { font-family: var(--font-titles); font-size: 2.5em; font-weight: 900; color: #000; line-height: 1; }
-/* Aksen warna bawah untuk tiap kartu */
-.stat-card:nth-child(1) { border-bottom: 8px solid var(--accent-purple); }
-.stat-card:nth-child(2) { border-bottom: 8px solid var(--success); }
-.stat-card:nth-child(3) { border-bottom: 8px solid var(--accent-orange); }
-
-/* Table Pop Art */
-.table-container { background: white; border: var(--border-thick); border-radius: 25px; overflow: hidden; box-shadow: 8px 8px 0 rgba(0,0,0,0.08); }
-table { width: 100%; border-collapse: collapse; text-align: left; }
-th, td { padding: 20px; border-bottom: 3px solid var(--bg-elevated); }
-th { background: var(--bg-elevated); font-family: var(--font-titles); color: var(--text-on-light); font-weight: 900; font-size: 0.9em; text-transform: uppercase; border-bottom: var(--border-thick); letter-spacing: 1px; }
-td { font-weight: 700; font-size: 1em; }
-td strong { font-weight: 900; color: var(--accent-purple); font-size: 1.1em; }
-
-/* Status Badges & Dropdown dari JS */
-.badge { padding: 8px 16px; border-radius: 12px; font-size: 0.85em; font-weight: 900; border: var(--border-thick); text-transform: uppercase; letter-spacing: 1px; box-shadow: 3px 3px 0 rgba(0,0,0,0.2); display: inline-block; }
-.badge.pending { background: var(--accent-orange); color: #000; }
-.badge.paid { background: var(--success); color: white; }
-
-select.status-dropdown { background: var(--bg-elevated); color: var(--text-on-light); border: var(--border-thick); padding: 10px 15px; border-radius: 12px; font-family: inherit; font-weight: 800; text-transform: uppercase; cursor: pointer; outline: none; box-shadow: 3px 3px 0 rgba(0,0,0,0.15); transition: 0.2s; }
-select.status-dropdown:focus { border-color: var(--accent-purple); background: white; }
-
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: var(--bg-elevated); border-left: var(--border-thick); }
-::-webkit-scrollbar-thumb { background: #000; border-radius: 6px; border: 2px solid var(--bg-elevated); }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-purple); }
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .admin-layout { flex-direction: column; overflow-y: auto; height: auto; }
-    .sidebar { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .sidebar h2 { grid-column: 1 / -1; margin-bottom: 20px; }
-    .main-content { overflow: visible; }
-    #btn-logout { margin-top: 0; }
-}
-@media (max-width: 768px) {
-    .sidebar { display: flex; }
-    header { flex-direction: column; gap: 20px; align-items: flex-start; }
-    .table-container { overflow-x: auto; }
-    th, td { white-space: nowrap; }
+.sidebar {
+    width: 280px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(5px);
+    border-right: 3px solid var(--bg-elevated);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: fixed; /* Kunci di kiri */
+    height: 100vh;
+    z-index: 100;
 }
 
-/* Tombol Hapus Pesanan */
+.sidebar h2 {
+    font-family: var(--font-titles);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--accent-purple);
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.nav-menu {
+    list-style: none;
+}
+
+.nav-menu li {
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.15s ease;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-menu li.active {
+    background: var(--accent-purple);
+    color: #000;
+    border: 3px solid #0F172A;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.nav-menu li:not(.active):hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+#btn-logout {
+    margin-top: auto; /* Taruh paling bawah */
+    color: var(--danger);
+}
+
+#btn-logout:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    margin-left: 280px; /* Sesuai lebar sidebar */
+    padding: 40px;
+    width: calc(100% - 280px); /* Batasi lebar agar tidak meluber */
+}
+
+main header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+main h1 {
+    font-family: var(--font-titles);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 2.2em;
+    color: white;
+    text-shadow: 3px 3px 0 #000;
+}
+
+/* =========================================
+   4. Stats Grid
+   ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: var(--bg-surface);
+    border: var(--border-thick);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-hard);
+    transition: 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 rgba(15, 23, 42, 0.2);
+}
+
+.stat-card:nth-child(1) { border-color: var(--accent-purple); box-shadow: 8px 8px 0 rgba(168, 85, 247, 0.3); }
+.stat-card:nth-child(2) { border-color: var(--success); box-shadow: 8px 8px 0 rgba(16, 185, 129, 0.3); }
+.stat-card:nth-child(3) { border-color: var(--accent-orange); box-shadow: 8px 8px 0 rgba(251, 146, 60, 0.3); }
+
+.stat-card h3 {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-family: var(--font-titles);
+    font-size: 2.5em;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+/* =========================================
+   5. General Buttons
+   ========================================= */
+.action-btn {
+    display: inline-block;
+    background: #000;
+    color: white;
+    border: 3px solid #0F172A;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.15s ease;
+    box-shadow: 4px 4px 0 rgba(168, 85, 247, 0.3);
+}
+
+.action-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(168, 85, 247, 0.3);
+    background-color: rgba(6, 9, 15, 0.9);
+}
+
+.action-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 rgba(168, 85, 247, 0.3);
+}
+
+.action-btn.outline {
+    background: white;
+    color: #000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.action-btn.outline:hover {
+    background: var(--bg-elevated);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   6. Table Design (Desktop & BASE)
+   ========================================= */
+.table-container {
+    background: var(--bg-surface);
+    border: var(--border-thick);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow-hard);
+    width: 100%; /* Wajib agar responsive */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    min-width: 900px; /* Mencegah kolom berimpitan di desktop */
+}
+
+/* Mengatur lebar spesifik untuk detail pesanan di Desktop */
+th:nth-child(4), td:nth-child(4) {
+    width: 300px; /* Kasih ruang lebih */
+}
+
+th {
+    text-align: left;
+    padding: 15px 20px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+    border-bottom: 2px dashed #CBD5E1;
+}
+
+td {
+    padding: 20px;
+    border-bottom: 2px dashed #F1F5F9;
+    vertical-align: top; /* Biar detail panjang gak narik ke tengah */
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: var(--bg-elevated);
+}
+
+td strong {
+    font-weight: 800;
+    color: #000;
+}
+
+td small {
+    font-size: 0.85em;
+    display: block;
+    margin-top: 3px;
+}
+
+/* Badges Status */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid #0F172A;
+}
+
+.badge.pending { background-color: var(--accent-orange); color: white; }
+.badge.paid { background-color: var(--success); color: white; }
+
+/* Dropdown Status di Tabel */
+.status-dropdown {
+    padding: 8px;
+    border: 2px solid #0F172A;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    background: white;
+    width: 100%;
+    max-width: 120px;
+    margin-right: 5px;
+}
+
+/* Tombol Hapus */
 .btn-delete {
     background: rgba(239, 68, 68, 0.1);
     color: var(--danger);
@@ -122,12 +399,160 @@ select.status-dropdown:focus { border-color: var(--accent-purple); background: w
     border-radius: 10px;
     cursor: pointer;
     font-weight: 800;
-    margin-top: 10px;
-    width: 100%;
+    font-size: 0.85em;
     transition: 0.2s;
-    display: block;
+    vertical-align: middle;
 }
+
 .btn-delete:hover {
     background: var(--danger);
     color: white;
+}
+
+/* =========================================
+   7. !!! BREAKPOINT RESPONSIVE (HP) !!!
+   Ubah Tabel Jadi Model Card List
+   ========================================= */
+
+@media (max-width: 992px) {
+    /* Sembunyikan Sidebar, Ubah Layout */
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 3px solid var(--bg-elevated);
+    }
+
+    .sidebar h2 { margin-bottom: 20px; font-size: 1.5em; }
+    
+    .nav-menu {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .nav-menu li { margin-bottom: 0; padding: 10px 15px; font-size: 0.8em;}
+    #btn-logout { margin-top: 0; }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    main header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    main h1 { font-size: 1.8em; }
+
+    .stats-grid {
+        grid-template-columns: 1fr; /* 1 Kolom saja di HP */
+        gap: 15px;
+    }
+
+    /* MAGIC: Ubah Tabel Jadi Cards */
+    .table-container {
+        padding: 10px;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block; /* Matikan sifat tabel */
+    }
+
+    /* Sembunyikan Header Tabel Asli */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    table {
+        min-width: auto; /* Matikan min-width desktop */
+    }
+
+    tr {
+        background: var(--bg-surface);
+        border: var(--border-thick);
+        border-radius: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow-hard);
+        position: relative;
+    }
+
+    /* Ubah Kolom Order ID jadi Header Card */
+    td:first-child {
+        border-bottom: 2px dashed #0F172A;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        padding-top: 0;
+        font-size: 1.2em;
+    }
+
+    /* Sisa Td: Bikin jadi Label di Kiri */
+    td {
+        border: none;
+        padding: 8px 0;
+        padding-left: 45%; /* Ruang untuk Label */
+        position: relative;
+        text-align: left;
+    }
+
+    /* Sisipkan Label Judul Kolom pakai Pseudo-element */
+    td::before {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 40%;
+        padding-right: 10px;
+        white-space: nowrap;
+        color: var(--text-secondary);
+        font-weight: 800;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        content: attr(data-label); /* Ambil judul dari atribut HTML */
+    }
+
+    /* SOLUSI FIX CUT-OFF DETAIL PESANAN */
+    /* Di HP, hapus batas lebar dan biarkan mengalir (white-space sudah pre-wrap di JS) */
+    th:nth-child(4), td:nth-child(4) {
+        width: 100%; 
+        font-size: 0.9em;
+        margin-top: 10px;
+        background: rgba(168, 85, 247, 0.05); /* Kasih highlight dikit */
+        padding: 15px;
+        padding-left: 15px; /* Hapus indent left khusus data ini */
+        border-radius: 10px;
+        border: 2px dashed rgba(168, 85, 247, 0.2);
+    }
+    
+    /* Hapus label 'Detail Pesanan' di card, karena data sudah jelas mencolok */
+    td:nth-child(4)::before { display: none; }
+
+    /* Atur elemen form di HP */
+    .status-dropdown {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: none;
+    }
+
+    .btn-delete {
+        width: 100%;
+        padding: 12px;
+    }
 }

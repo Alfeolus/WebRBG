@@ -7,22 +7,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLogout = document.getElementById('btn-logout');
     const btnRefresh = document.getElementById('btn-refresh');
 
+    // Cek status login saat halaman pertama kali dibuka
     if (sessionStorage.getItem('isAdminActive') === 'true') {
         loginOverlay.style.display = 'none';
         dashboard.style.display = 'flex';
         fetchOrders();
     }
 
+    // 1. Sistem Login Aman (Cek ke Server)
     btnLogin.addEventListener('click', async () => {
         const enteredPassword = passwordInput.value;
+
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: enteredPassword })
             });
+
             const result = await response.json();
+
             if (result.success) {
+                // Login Berhasil
                 loginOverlay.style.display = 'none';
                 dashboard.style.display = 'flex';
                 sessionStorage.setItem('isAdminActive', 'true');
@@ -47,11 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnRefresh.addEventListener('click', fetchOrders);
 
+    // 2. Mengambil Data dari Backend
     async function fetchOrders() {
         try {
             const response = await fetch('/api/getorders'); 
             if (!response.ok) throw new Error("Gagal mengambil data");
             const data = await response.json();
+            
             renderTable(data.orders);
             calculateStats(data.orders);
         } catch (error) {
@@ -61,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 3. Menampilkan Data ke Tabel (Responsive)
     function renderTable(orders) {
         const tbody = document.getElementById('orders-body');
         tbody.innerHTML = '';
@@ -75,19 +84,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalRupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(order.total);
             const waLink = `https://wa.me/62${order.wa.replace(/^0/, '')}`;
             
-            // Mengubah format enter (\n) menjadi tag <br> HTML agar turun baris di tabel
+            // Format enter HTML agar detail pesanan rapi
             const detailPesanan = order.items ? order.items.replace(/\n/g, '<br>') : '-';
 
+            // Menggunakan data-label agar tabel di HP bisa memunculkan judul per baris
             tr.innerHTML = `
-                <td><strong>${order.id}</strong></td>
-                <td>${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small></td>
-                <td><a href="${waLink}" target="_blank" style="color:var(--accent-cyan); text-decoration:none; font-weight:bold;">📱 ${order.wa}</a></td>
-                <td style="font-size: 0.85em; line-height: 1.5; white-space: pre-wrap;">${detailPesanan}</td>
-                <td>${totalRupiah}</td>
-                <td>
+                <td data-label="Order ID"><strong>${order.id}</strong></td>
+                <td data-label="Pemesan">${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small></td>
+                <td data-label="WhatsApp"><a href="${waLink}" target="_blank" style="color:var(--accent-cyan); text-decoration:none; font-weight:bold;">📱 ${order.wa}</a></td>
+                <td data-label="Detail Pesanan" style="font-size: 0.85em; line-height: 1.5; white-space: pre-wrap;">${detailPesanan}</td>
+                <td data-label="Total Bayar">${totalRupiah}</td>
+                <td data-label="Status">
                     <span class="badge ${order.status}">${order.status.toUpperCase()}</span>
                 </td>
-                <td>
+                <td data-label="Aksi">
                     <select class="status-dropdown" data-id="${order.id}">
                         <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
                         <option value="paid" ${order.status === 'paid' ? 'selected' : ''}>Paid</option>
@@ -103,12 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
             select.addEventListener('change', (e) => updateStatus(e.target.dataset.id, e.target.value));
         });
 
-        // Event listener tombol hapus
+        // Event listener hapus pesanan
         document.querySelectorAll('.btn-delete').forEach(btn => {
             btn.addEventListener('click', (e) => deleteOrder(e.target.dataset.id));
         });
     }
 
+    // 4. Update Status ke Backend
     async function updateStatus(orderId, newStatus) {
         try {
             const response = await fetch('/api/updatestatus', {
@@ -116,12 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderId: orderId, status: newStatus })
             });
-            if (response.ok) fetchOrders();
-            else alert('Gagal mengupdate status di server.');
-        } catch (error) { alert('Terjadi kesalahan koneksi!'); }
+            if (response.ok) {
+                fetchOrders();
+            } else {
+                alert('Gagal mengupdate status di server.');
+            }
+        } catch (error) {
+            alert('Terjadi kesalahan koneksi!');
+        }
     }
 
-    // FUNGSI BARU UNTUK MENGHAPUS PESANAN
+    // 5. Fitur Hapus Pesanan
     async function deleteOrder(orderId) {
         const confirmDelete = confirm(`⚠️ Peringatan!\nYakin ingin menghapus pesanan ${orderId}? Data yang dihapus tidak bisa dikembalikan.`);
         if (!confirmDelete) return;
@@ -133,13 +149,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ orderId: orderId })
             });
             if (response.ok) {
-                fetchOrders(); // Refresh tabel setelah dihapus
+                fetchOrders(); // Refresh data otomatis setelah dihapus
             } else {
                 alert('Gagal menghapus data di server.');
             }
-        } catch (error) { alert('Terjadi kesalahan koneksi!'); }
+        } catch (error) { 
+            alert('Terjadi kesalahan koneksi!'); 
+        }
     }
 
+    // 6. Hitung Statistik Otomatis
     function calculateStats(orders) {
         const totalOrders = orders.length;
         const totalPending = orders.filter(o => o.status === 'pending').length;
