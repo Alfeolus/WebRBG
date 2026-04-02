@@ -226,9 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const TOTEBAG_MODELS = [
-        { name: "Totebag #1", image: "pomerch/images/totebag/Totebag 1.png" },
-        { name: "Totebag #2", image: "pomerch/images/totebag/Totebag 2.png" },
-        { name: "Totebag #3", image: "pomerch/images/totebag/Totebag 3.png" }
+        { name: "Totebag #1", image: "pomerch/images/Totebag/Totebag 1.png" },
+        { name: "Totebag #2", image: "pomerch/images/Totebag/Totebag 2.png" },
+        { name: "Totebag #3", image: "pomerch/images/Totebag/Totebag 3.png" }
     ];
 
     const productDatabase = {
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item.type === 'Dryfit') placeholderImg = "pomerch/images/dryfit/dryfit-preview.png";
                 if (item.type === 'Kaos') placeholderImg = "pomerch/images/kaos/kaos-preview.png";
                 if (item.type === 'Cap') placeholderImg = "pomerch/images/cap/cap-preview.png";
-                if (item.type === 'Totebag') placeholderImg = "pomerch/images/totebag/totebag-preview.png";
+                if (item.type === 'Totebag') placeholderImg = "pomerch/images/Totebag/totebag-preview.png";
                 itemHtml += `<img src="${placeholderImg}" class="bundle-item-preview" id="preview-${itemGroupId}">`;
 
                 if (item.designs) itemHtml += createDropdown(`${itemGroupId}-design`, 'Desain', item.designs);
@@ -548,7 +548,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (currentSelection.product === 'Cap') {
                     itemImage = "pomerch/images/cap/cap-preview.png";
                 } else if (currentSelection.product === 'Totebag') {
-                    itemImage = "pomerch/images/totebag/totebag-preview.png";
+                    itemImage = "pomerch/images/Totebag/totebag-preview.png";
                 }
             }
         } else if (currentSelection.type === 'bundle') {
