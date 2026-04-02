@@ -146,6 +146,15 @@
                 </div>
             </div>
 
+            <div class="product-card" data-product="Shared Grace">
+                <div class="img-wrapper"><img src="pomerch/images/sharedgrace.png" alt="Shared Grace"></div>
+                <div class="product-info">
+                    <h3>Shared Grace</h3>
+                    <div class="price">Rp 184.000</div>
+                    <button class="action-button">Pilih Bundle</button>
+                </div>
+            </div>  
+
         </div>
     </div>
     
@@ -233,10 +242,16 @@
                         </select>
                     </div>
                     
-                    <div class="autocomplete-wrapper">
-                        <input type="text" id="customer-referral" placeholder="Kode Referral (Kalau Ada, Boleh Diisi)" autocomplete="off">
-                        <div id="referral-suggestions" class="suggestions-list"></div>
-                    </div>
+                    <select id="customer-referral">
+                        <option value="TIDAK ADA" selected>— Pilih Referral Code (Jika Ada) —</option>
+                        <option value="Love">Love</option>
+                        <option value="Faithfull">Faithfull</option>
+                        <option value="Patience">Patience</option>
+                        <option value="Joy">Joy</option>
+                        <option value="Kindness">Kindness</option>
+                        <option value="Peace">Peace</option>
+                        <option value="Goodness">Goodness</option>
+                    </select>
                     
                     <button id="checkout-button" class="action-button success-btn checkout-btn">Proses Pesanan Sekarang!</button>
                 </div>

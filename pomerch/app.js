@@ -286,6 +286,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Sticker", type: "Stiker", models: STIKER_MODELS},
                 { name: "Cap", type: "Cap", models: CAP_MODELS}
             ]
+        },
+
+        "Shared Grace": {
+            basePrice: 184000, type: 'bundle',
+            items: [
+                { name: "Kaos I", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+            ]
         }
     };
     
