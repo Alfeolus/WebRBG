@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navDashboard.classList.remove('active');
         viewDashboard.style.display = 'none';
         viewReferral.style.display = 'block';
-        renderReferralRecap(); // Tampilkan data saat menu diklik
+        renderReferralRecap(); 
     });
 
     // ==========================================
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnLogout.addEventListener('click', () => {
         sessionStorage.removeItem('isAdminActive');
-        window.location.reload(); // Reload bersih
+        window.location.reload(); 
     });
 
     btnRefresh.addEventListener('click', fetchOrders);
@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderTable(globalOrders);
             calculateStats(globalOrders);
             
-            // Jika admin sedang buka tab referral, langsung update datanya juga
             if(viewReferral.style.display === 'block') {
                 renderReferralRecap();
             }
@@ -109,31 +108,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // FITUR BARU: REKAP REFERRAL
+    // FITUR: REKAP REFERRAL DENGAN ITEM BREAKDOWN
     // ==========================================
     function renderReferralRecap() {
-        referralGrid.innerHTML = ''; // Kosongkan dulu
+        referralGrid.innerHTML = ''; 
         
         REFERRAL_LIST.forEach(code => {
-            // Hitung berapa kali kode ini dipakai di database pesanan
-            const count = globalOrders.filter(order => {
-                // Pastikan order punya referralCode dan cocok (tidak peduli huruf besar/kecil)
-                return order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase();
-            }).length;
+            const count = globalOrders.filter(order => order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase()).length;
+            const paidOrders = globalOrders.filter(order => order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase() && order.status === 'paid');
+            const countPaid = paidOrders.length;
 
-            const countPaid = globalOrders.filter(order => {
-                return order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase() && order.status === 'paid';
-            }).length;
+            // Logika baru untuk memecah item berdasarkan pesanan yang sudah PAID
+            const itemCounts = {};
+            paidOrders.forEach(order => {
+                if (!order.items) return;
+                const itemsList = order.items.split('\n'); 
+                itemsList.forEach(itemLine => {
+                    // Hanya mengambil Nama Barang dan Jumlahnya (Mengabaikan size & desain)
+                    const regex = /^(.*?)\s+\(x(\d+)\)/;
+                    const match = itemLine.match(regex);
+                    if (match) {
+                        const itemName = match[1].trim();
+                        const itemQty = parseInt(match[2]);
+                        if (!itemCounts[itemName]) itemCounts[itemName] = 0;
+                        itemCounts[itemName] += itemQty;
+                    }
+                });
+            });
 
-            // Buat elemen Card
+            // Menyusun HTML untuk Detail Terjual
+            let breakdownHtml = '';
+            if (Object.keys(itemCounts).length > 0) {
+                breakdownHtml = '<div style="margin-top: 15px; border-top: 2px dashed #CBD5E1; padding-top: 10px;">';
+                breakdownHtml += '<p style="font-size: 0.75em; color: var(--text-secondary); font-weight: 800; text-transform: uppercase; margin-bottom: 5px;">Item Terjual (PAID):</p>';
+                
+                for (const [itemName, qty] of Object.entries(itemCounts)) {
+                    breakdownHtml += `
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 4px;">
+                            <span style="font-weight: 700; color: #000;">${itemName}</span>
+                            <span style="font-weight: 900; color: var(--accent-purple);">${qty} pcs</span>
+                        </div>`;
+                }
+                breakdownHtml += '</div>';
+            }
+
             const card = document.createElement('div');
             card.className = 'stat-card';
-            card.style.borderColor = 'var(--accent-cyan)'; // Warna list biru neon
+            card.style.borderColor = 'var(--accent-cyan)'; 
             
             card.innerHTML = `
                 <h3>Kode: ${code}</h3>
-                <p>${count} <span style="font-size: 0.4em; color: var(--text-secondary); font-weight: 700;">Pesanan</span></p>
+                <p>${count} <span style="font-size: 0.4em; color: var(--text-secondary); font-weight: 700;">Pesanan Masuk</span></p>
                 <small style="color: var(--success); font-weight: 800; display: block; margin-top: 5px;">✅ ${countPaid} Sudah Bayar</small>
+                ${breakdownHtml}
             `;
             
             referralGrid.appendChild(card);
@@ -158,9 +185,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const waLink = `https://wa.me/62${order.wa.replace(/^0/, '')}`;
             const detailPesanan = order.items ? order.items.replace(/\n/g, '<br>') : '-';
 
+            // Menambahkan Badge Referral di bawah Nama Pemesan jika mereka memakai kode referral
+            let refBadge = '';
+            if (order.referralCode && order.referralCode !== "TIDAK ADA" && order.referralCode.trim() !== "") {
+                refBadge = `<br><span style="display:inline-block; margin-top:6px; background:var(--accent-purple); color:white; padding:3px 8px; border-radius:6px; font-size:0.75em; font-weight:800;">💎 REF: ${order.referralCode.toUpperCase()}</span>`;
+            }
+
             tr.innerHTML = `
                 <td data-label="Order ID"><strong>${order.id}</strong></td>
-                <td data-label="Pemesan">${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small></td>
+                <td data-label="Pemesan">
+                    ${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small>
+                    ${refBadge}
+                </td>
                 <td data-label="WhatsApp"><a href="${waLink}" target="_blank" style="color:var(--accent-cyan); text-decoration:none; font-weight:bold;">📱 ${order.wa}</a></td>
                 <td data-label="Detail Pesanan" style="font-size: 0.85em; line-height: 1.5; white-space: pre-wrap;">${detailPesanan}</td>
                 <td data-label="Total Bayar">${totalRupiah}</td>
