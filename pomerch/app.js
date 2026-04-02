@@ -249,12 +249,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS.map(m => m.name) } 
             ]
         },
-        "Mistletoe Mavericks": {
+        "Complete in Him": {
             basePrice: 270000, type: 'bundle',
             items: [
-                { name: "Dryfit I", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }, 
-                { name: "Dryfit II", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }, 
-                { name: "Dryfit III", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES } 
+                { name: "Kaos I", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos III", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES } 
             ]
         }
     };
@@ -528,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (currentSelection.type === 'bundle') {
             if (currentSelection.product === "Santa’s Safe Haven") itemImage = "pomerch/images/santasafeheaven.png";
             else if (currentSelection.product === "A December to Remember") itemImage = "pomerch/images/decembertoremember.png";
-            else if (currentSelection.product === "Mistletoe Mavericks") itemImage = "pomerch/images/mistletoemaverick.png";
+            else if (currentSelection.product === "Complete in Him") itemImage = "pomerch/images/completeinhim.png";
             else itemImage = "pomerch/images/bundleofblessings.png";
         }
 
