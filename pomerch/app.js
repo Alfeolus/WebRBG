@@ -233,10 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Kaos III", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }
             ]
         },
-        "Santa’s Safe Haven": {
-            basePrice: 182000, type: 'bundle',
+        "Revival Warrior": {
+            basePrice: 270000, type: 'bundle',
             items: [
-                { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
+                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
+                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
                 { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }
             ]
         },
@@ -526,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         } else if (currentSelection.type === 'bundle') {
-            if (currentSelection.product === "Santa’s Safe Haven") itemImage = "pomerch/images/santasafeheaven.png";
+            if (currentSelection.product === "Revival Warrior") itemImage = "pomerch/images/revivalwarrior.png";
             else if (currentSelection.product === "A December to Remember") itemImage = "pomerch/images/decembertoremember.png";
             else if (currentSelection.product === "Complete in Him") itemImage = "pomerch/images/completeinhim.png";
             else itemImage = "pomerch/images/bundleofblessings.png";
