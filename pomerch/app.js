@@ -241,13 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }
             ]
         },
-        "A December to Remember": {
-            basePrice: 195000, type: 'bundle',
+        "Faith Balance": {
+            basePrice: 182000, type: 'bundle',
             items: [
                 { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
                 { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
-                { name: "Stiker", type: "Stiker", models: STIKER_MODELS.map(m => m.name) }, 
-                { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS.map(m => m.name) } 
             ]
         },
         "Complete in Him": {
@@ -528,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else if (currentSelection.type === 'bundle') {
             if (currentSelection.product === "Revival Warrior") itemImage = "pomerch/images/revivalwarrior.png";
-            else if (currentSelection.product === "A December to Remember") itemImage = "pomerch/images/decembertoremember.png";
+            else if (currentSelection.product === "Faith Balance") itemImage = "pomerch/images/faithbalance.png";
             else if (currentSelection.product === "Complete in Him") itemImage = "pomerch/images/completeinhim.png";
             else itemImage = "pomerch/images/bundleofblessings.png";
         }
@@ -537,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: uniqueCartId,
             name: currentSelection.product,
             price: finalPrice,
-            quantity: selectedQty, // <--- UBAH DARI 1 MENJADI selectedQty
+            quantity: selectedQty,
             options: {
                 size: optionsSummary, 
                 notes: " " 
