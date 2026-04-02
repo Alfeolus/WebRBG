@@ -186,6 +186,22 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Trouble Maker - Spongebob", image: "pomerch/images/kaos/Trouble Maker - Spongebob.png" }
     ];
 
+    const NO_COUPLE_DESIGNS = [
+         { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
+        { name: "Child of God", image: "pomerch/images/kaos/Child of God.png" },
+        { name: "Courage to be Disliked", image: "pomerch/images/kaos/Courage to be Disliked.png" },
+        { name: "Faith", image: "pomerch/images/kaos/Faith.png" },
+        { name: "Galatians", image: "pomerch/images/kaos/Galatians.png" },
+        { name: "Losing Us", image: "pomerch/images/kaos/Losing Us.png" },
+        { name: "Love Your Enemies", image: "pomerch/images/kaos/Love Your Enemies.png" },
+        { name: "Magnetic Love", image: "pomerch/images/kaos/Magnetic Love.png" },
+        { name: "Matcha", image: "pomerch/images/kaos/Matcha.png" },
+        { name: "NPD", image: "pomerch/images/kaos/NPD.png" },
+        { name: "Ocean and Engine", image: "pomerch/images/kaos/Ocean and Engine.png" },
+        { name: "Risk it All", image: "pomerch/images/kaos/Risk it All.png" },
+        { name: "Terbuang Dalam Waktu", image: "pomerch/images/kaos/Terbuang Dalam Waktu.png" }
+    ];
+
     const SHARED_GRACE_DESIGNS = [
     { name: "Style - Eyes", image: "pomerch/images/kaos/Style - Eyes.png" },
     { name: "Style - Lips", image: "pomerch/images/kaos/Style - Lips.png" },
@@ -239,14 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "Keychain": { basePrice: 8000, type: 'satuan', models: KEYCHAIN_MODELS },
         "Cap": { basePrice: 40000, type: 'satuan', models: CAP_MODELS },
         "Totebag": { basePrice: 50000, type: 'satuan', models: TOTEBAG_MODELS },
-        "Bundle of Blessings": {
-            basePrice: 276000, type: 'bundle',
-            items: [
-                { name: "Kaos I", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
-                { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
-                { name: "Kaos III", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }
-            ]
-        },
         "Revival Warrior": {
             basePrice: 270000, type: 'bundle',
             items: [
@@ -258,22 +266,22 @@ document.addEventListener('DOMContentLoaded', () => {
         "Faith Balance": {
             basePrice: 182000, type: 'bundle',
             items: [
-                { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
+                { name: "Kaos", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES },
                 { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
             ]
         },
         "Complete in Him": {
             basePrice: 270000, type: 'bundle',
             items: [
-                { name: "Kaos I", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
-                { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
-                { name: "Kaos III", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES } 
+                { name: "Kaos I", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos II", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos III", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES } 
             ]
         },
         "Carry the Light": {
             basePrice: 270000, type: 'bundle',
             items: [
-                { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
                 { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS},
                 { name: "Totebag", type: "Totebag", models: TOTEBAG_MODELS}
             ]
