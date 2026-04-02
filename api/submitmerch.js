@@ -49,6 +49,38 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Hanya metode POST yang diizinkan' });
 
   try {
+    // ========================================================
+    // 🛡️ FITUR ANTI SPAM & DDoS (RATE LIMITING BERDASARKAN IP)
+    // ========================================================
+    
+    // 1. Ambil IP Address asli dari pemesan
+    const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown_ip';
+    const safeIp = ip.replace(/[^a-zA-Z0-9]/g, '_'); // Bersihkan format IP
+
+    const rateLimitRef = db.collection('rate_limits').doc(safeIp);
+    const rateLimitDoc = await rateLimitRef.get();
+
+    // 2. Cek apakah IP ini baru saja melakukan order
+    if (rateLimitDoc.exists) {
+        const lastOrderTime = rateLimitDoc.data().timestamp?.toDate();
+        if (lastOrderTime) {
+            const now = new Date();
+            const selisihDetik = (now - lastOrderTime) / 1000;
+            
+            // 3. JIKA BELUM 60 DETIK SEJAK ORDER TERAKHIR, TOLAK MENTAH-MENTAH!
+            if (selisihDetik < 60) {
+                return res.status(429).json({ message: 'Terdeteksi Spam! Harap tunggu 1 menit sebelum membuat pesanan baru.' });
+            }
+        }
+    }
+    
+    // 4. Catat waktu order IP ini ke database untuk pelacakan
+    await rateLimitRef.set({ timestamp: admin.firestore.FieldValue.serverTimestamp() });
+
+    // ========================================================
+    // AKHIR FITUR ANTI SPAM
+    // ========================================================
+
     const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       
     const kodeUnik = Math.floor(Math.random() * 99) + 1;
