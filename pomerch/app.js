@@ -218,13 +218,26 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "GWS", image: "pomerch/images/keychain/GWS.png" },
         { name: "Couple 1", image: "pomerch/images/keychain/couple edition 1.png" },
         { name: "Couple 2", image: "pomerch/images/keychain/couple edition 2.png" }
-    ]; 
+    ];
+    
+    const CAP_MODELS = [
+        { name: "Cap #1", image: "pomerch/images/cap/cap 1.png" },
+        { name: "Cap #2", image: "pomerch/images/cap/cap 2.png" }
+    ];
+
+    const TOTEBAG_MODELS = [
+        { name: "Totebag #1", image: "pomerch/images/cap/Totebag 1.png" },
+        { name: "Totebag #2", image: "pomerch/images/cap/Totebag 2.png" },
+        { name: "Totebag #3", image: "pomerch/images/cap/Totebag 3.png" }
+    ];
 
     const productDatabase = {
         "Kaos": { basePrice: 95000, type: 'satuan', designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
         "Dryfit": { basePrice: 92000, type: 'satuan', designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
         "Stiker": { basePrice: 5000, type: 'satuan', models: STIKER_MODELS },
         "Keychain": { basePrice: 8000, type: 'satuan', models: KEYCHAIN_MODELS },
+        "Cap": { basePrice: 40000, type: 'satuan', models: CAP_MODELS },
+        "Totebag": { basePrice: 50000, type: 'satuan', models: TOTEBAG_MODELS },
         "Bundle of Blessings": {
             basePrice: 276000, type: 'bundle',
             items: [
@@ -260,7 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
             basePrice: 270000, type: 'bundle',
             items: [
                 { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
-                { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS}
+                { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS},
+                { name: "Totebag", type: "Totebag", models: TOTEBAG_MODELS}
             ]
         }
     };
@@ -382,7 +396,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item.type === 'Keychain') placeholderImg = "pomerch/images/keychain/keychain-preview.png";
                 if (item.type === 'Dryfit') placeholderImg = "pomerch/images/dryfit-preview.png";
                 if (item.type === 'Kaos') placeholderImg = "pomerch/images/kaos-preview.png";
-                
+                if (item.type === 'Cap') placeholderImg = "pomerch/images/cap-preview.png";
+                if (item.type === 'Totebag') placeholderImg = "pomerch/images/totebag-preview.png";
                 itemHtml += `<img src="${placeholderImg}" class="bundle-item-preview" id="preview-${itemGroupId}">`;
 
                 if (item.designs) itemHtml += createDropdown(`${itemGroupId}-design`, 'Desain', item.designs);
@@ -529,6 +544,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     itemImage = "pomerch/images/stiker/sticker-preview.png";
                 } else if (currentSelection.product === 'Keychain') {
                     itemImage = "pomerch/images/keychain/keychain-preview.png";
+                }
+                else if (currentSelection.product === 'Cap') {
+                    itemImage = "pomerch/images/cap/cap-preview.png";
+                } else if (currentSelection.product === 'Totebag') {
+                    itemImage = "pomerch/images/totebag/totebag-preview.png";
                 }
             }
         } else if (currentSelection.type === 'bundle') {
