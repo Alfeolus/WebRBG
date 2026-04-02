@@ -255,6 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
                 { name: "Kaos III", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES } 
             ]
+        },
+        "Carry the Light": {
+            basePrice: 270000, type: 'bundle',
+            items: [
+                { name: "Kaos", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS}
+            ]
         }
     };
     
