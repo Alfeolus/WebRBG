@@ -253,8 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Dryfit": { basePrice: 92000, type: 'satuan', designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
         "Stiker": { basePrice: 5000, type: 'satuan', models: STIKER_MODELS },
         "Keychain": { basePrice: 8000, type: 'satuan', models: KEYCHAIN_MODELS },
-        "Cap": { basePrice: 40000, type: 'satuan', models: CAP_MODELS },
-        "Totebag": { basePrice: 50000, type: 'satuan', models: TOTEBAG_MODELS },
+        "Cap": { basePrice: 35000, type: 'satuan', models: CAP_MODELS },
+        "Totebag": { basePrice: 25000, type: 'satuan', models: TOTEBAG_MODELS },
         "Revival Warrior": {
             basePrice: 270000, type: 'bundle',
             items: [
