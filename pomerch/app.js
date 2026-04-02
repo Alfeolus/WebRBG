@@ -226,9 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const TOTEBAG_MODELS = [
-        { name: "Totebag #1", image: "pomerch/images/cap/Totebag 1.png" },
-        { name: "Totebag #2", image: "pomerch/images/cap/Totebag 2.png" },
-        { name: "Totebag #3", image: "pomerch/images/cap/Totebag 3.png" }
+        { name: "Totebag #1", image: "pomerch/images/totebag/Totebag 1.png" },
+        { name: "Totebag #2", image: "pomerch/images/totebag/Totebag 2.png" },
+        { name: "Totebag #3", image: "pomerch/images/totebag/Totebag 3.png" }
     ];
 
     const productDatabase = {
@@ -394,10 +394,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let placeholderImg = "images/placeholder-design.png"; 
                 if (item.type === 'Stiker') placeholderImg = "pomerch/images/stiker/stiker-preview.png";
                 if (item.type === 'Keychain') placeholderImg = "pomerch/images/keychain/keychain-preview.png";
-                if (item.type === 'Dryfit') placeholderImg = "pomerch/images/dryfit-preview.png";
-                if (item.type === 'Kaos') placeholderImg = "pomerch/images/kaos-preview.png";
-                if (item.type === 'Cap') placeholderImg = "pomerch/images/cap-preview.png";
-                if (item.type === 'Totebag') placeholderImg = "pomerch/images/totebag-preview.png";
+                if (item.type === 'Dryfit') placeholderImg = "pomerch/images/dryfit/dryfit-preview.png";
+                if (item.type === 'Kaos') placeholderImg = "pomerch/images/kaos/kaos-preview.png";
+                if (item.type === 'Cap') placeholderImg = "pomerch/images/cap/cap-preview.png";
+                if (item.type === 'Totebag') placeholderImg = "pomerch/images/totebag/totebag-preview.png";
                 itemHtml += `<img src="${placeholderImg}" class="bundle-item-preview" id="preview-${itemGroupId}">`;
 
                 if (item.designs) itemHtml += createDropdown(`${itemGroupId}-design`, 'Desain', item.designs);
