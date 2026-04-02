@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             basePrice: 128000, type: 'bundle',
             items: [
                 { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }, 
-                { name: "Sticker", type: "Sticker", models: STIKER_MODELS},
+                { name: "Sticker", type: "Stiker", models: STIKER_MODELS},
                 { name: "Cap", type: "Cap", models: CAP_MODELS}
             ]
         }
