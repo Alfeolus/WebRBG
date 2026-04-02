@@ -185,6 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Trouble Maker - Patrick", image: "pomerch/images/kaos/Trouble Maker - Patrick.png" },
         { name: "Trouble Maker - Spongebob", image: "pomerch/images/kaos/Trouble Maker - Spongebob.png" }
     ];
+
+    const SHARED_GRACE_DESIGNS = [
+    { name: "Style - Eyes", image: "pomerch/images/kaos/Style - Eyes.png" },
+    { name: "Style - Lips", image: "pomerch/images/kaos/Style - Lips.png" },
+    { name: "Trouble Maker - Patrick", image: "pomerch/images/kaos/Trouble Maker - Patrick.png" },
+    { name: "Trouble Maker - Spongebob", image: "pomerch/images/kaos/Trouble Maker - Spongebob.png" }
+    ];
+
     const KAOS_SIZES = ["S", "M", "L", "XL", "XXL [+5K]"]; 
     
     const DRYFIT_DESIGNS = [
@@ -242,9 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "Revival Warrior": {
             basePrice: 270000, type: 'bundle',
             items: [
-                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
-                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
-                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }
+                { name: "Dryfit I", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
+                { name: "Dryfit II", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
+                { name: "Dryfit III", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }
             ]
         },
         "Faith Balance": {
@@ -281,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Shared Grace": {
             basePrice: 184000, type: 'bundle',
             items: [
-                { name: "Kaos I", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
-                { name: "Kaos II", type: "Kaos", designs: KAOS_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos I", type: "Kaos", designs: SHARED_GRACE_DESIGNS, sizes: KAOS_SIZES }, 
+                { name: "Kaos II", type: "Kaos", designs: SHARED_GRACE_DESIGNS, sizes: KAOS_SIZES }, 
             ]
         }
     };
@@ -485,9 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === multiStepModal) multiStepModal.style.display = 'none';
     });
     
-    // ==========================================
-    // LOGIKA TAMBAH KE KERANJANG (GAMBAR & DETAIL)
-    // ==========================================
+
     addToCartButton.addEventListener('click', () => {
         const productData = productDatabase[currentSelection.product];
         let finalPrice = currentSelection.basePrice;
@@ -540,8 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const uniqueCartId = Date.now().toString();
         const selectedQty = parseInt(modalQtyInput.value) || 1;
-        // --- LOGIKA MENCARI GAMBAR ASLI ---
-        let itemImage = "pomerch/images/logo.png"; // Fallback
+        let itemImage = "pomerch/images/logo.png";
         if (currentSelection.type === 'satuan') {
             if (productData.designs) {
                 const designObj = productData.designs.find(d => d.name === currentSelection.design);
@@ -587,9 +592,6 @@ document.addEventListener('DOMContentLoaded', () => {
         multiStepModal.style.display = 'none';
     });
 
-    // ==========================================
-    // LOGIKA MULTI-STEP KERANJANG
-    // ==========================================
     
     function resetCartSteps() {
         if(cartStep1 && cartStep2) {
@@ -629,9 +631,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } 
     });
 
-    // ==========================================
-    // TAMPILKAN ITEM DI KERANJANG
-    // ==========================================
 
     function renderCart() {
         modalCartItemsEl.innerHTML = '';
@@ -686,7 +685,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
         modalCartItemsEl.querySelectorAll('.remove-item-button').forEach(btn => btn.addEventListener('click', () => removeFromCart(btn.dataset.id)));
         
-        // Reset Dropdown Referral saat Buka Keranjang
         customerReferralInput.value = 'TIDAK ADA';
     }
     
@@ -705,7 +703,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const customerName = customerNameInput.value.trim();
             const customerPhone = customerPhoneInput.value.trim();
             const customerClass = customerClassInput.value;
-            // LANGSUNG AMBIL VALUE DARI DROPDOWN
             const validReferralCode = customerReferralInput.value; 
 
             const phoneRegex = /^[0-9]{8,15}$/; 
