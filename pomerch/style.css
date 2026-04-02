@@ -356,3 +356,42 @@ body {
     border-color: var(--accent-purple); 
     background: var(--bg-surface);
 }
+
+@media (max-width: 600px) {
+    .countdown-timer {
+        gap: 5px;
+    }
+    
+    .time-block {
+        padding: 10px 5px; 
+        min-width: 60px; 
+        border-radius: 12px;
+    }
+    
+    .time-block span {
+        font-size: 1.6em; 
+    }
+    
+    .time-block small {
+        font-size: 0.55em;
+        letter-spacing: 1px;
+    }
+    
+    .time-separator {
+        font-size: 1.5em; 
+        margin: 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .time-block {
+        min-width: 50px;
+        padding: 8px 2px;
+    }
+    .time-block span {
+        font-size: 1.3em;
+    }
+    .time-block small {
+        font-size: 0.45em;
+    }
+}
