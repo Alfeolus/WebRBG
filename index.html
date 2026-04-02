@@ -1,20 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teleporting...</title>
+    <title>PO RBG Opening Soon 🚀</title>
     
-    <meta http-equiv="refresh" content="0; url=/pomerch/index.html">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     
-    <script>
-        window.location.href = "/pomerch/index.html";
-    </script>
+    <style>
+        :root {
+            --bg-base: #06090F; 
+            --bg-surface: #FFFFFF; 
+            --text-on-light: #0F172A; 
+            --accent-purple: #A855F7; 
+            --accent-cyan: #22D3EE; 
+            --accent-orange: #FB923C; 
+            --border-thick: 3px solid #0F172A; 
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-titles: 'Montserrat', sans-serif; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: var(--font-main); 
+            background-color: var(--bg-base); 
+            color: var(--bg-surface); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow: hidden; 
+            padding: 20px;
+        }
+        .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.25; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 15s linear infinite; }
+        .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -150px; right: -150px; }
+        .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -100px; left: -150px; animation-delay: -5s; }
+        .blob-orange { background-color: var(--accent-orange); width: 400px; height: 400px; top: 40%; left: 30%; animation-delay: -10s; }
+        @keyframes blob-float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(40px) scale(1.05); } }
+
+        .opening-card {
+            background: var(--bg-surface);
+            border: var(--border-thick);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 15px 15px 0 rgba(168, 85, 247, 0.4); 
+            position: relative;
+            z-index: 10;
+            color: var(--text-on-light);
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        h1 {
+            font-family: var(--font-titles);
+            font-size: 1.8em;
+            color: var(--accent-purple);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            font-size: 1em;
+            font-weight: 600;
+            color: #64748B;
+            margin-bottom: 25px;
+        }
+
+        .countdown-display {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .time-box {
+            background: #0F172A;
+            color: var(--bg-surface);
+            border: 2px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 10px;
+            min-width: 70px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5); 
+        }
+        .time-box span { font-size: 2.2em; font-weight: 800; color: var(--bg-surface); display: block; }
+        .time-box small { font-size: 0.65em; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; }
+
+
+        .preparing-msg { font-size: 0.9em; font-weight: 700; color: #333; margin-top: 10px; }
+        
+
+        .manual-link { font-size: 0.75em; color: var(--text-on-light); margin-top: 20px; display: block; font-weight: 600; text-decoration: none; border: 2px solid transparent; padding: 5px 10px; border-radius: 8px; transition: 0.15s ease; }
+        .manual-link a { color: var(--accent-cyan); text-decoration: none; font-weight: 800; }
+        .manual-link:hover { border-color: rgba(34, 211, 238, 0.3); background: rgba(34, 211, 238, 0.1); }
+
+    </style>
 </head>
 <body>
-    <div style="text-align: center; margin-top: 20%;">
-        <h1>Gaada apa" disini! teleport dulu yaa 🚀</h1>
-        <p>Kalau tidak pindah otomatis, <a href="/pomerch/index.html">klik di sini</a>.</p>
+
+    <div class="pastel-blobs">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-orange"></div>
     </div>
+
+    <div class="opening-card">
+        <h1>PO MERCH RBG OPENING IN... 🚀</h1>
+        <p class="subtitle">Sabar dulu ya! Kita lagi nyiapin sesuatu.</p>
+
+        <div class="countdown-display">
+            <div class="time-box">
+                <span id="days">00</span>
+                <small>Days</small>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <small>Hours</small>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <small>Minutes</small>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <small>Seconds</small>
+            </div>
+        </div>
+
+        <p class="preparing-msg">Kita lagi siapin yang terbaik.. ⏳</p>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const openDate = new Date("Apr 04, 2026 15:00:00").getTime();
+
+            const storeUrl = "/pomerch/index.html";
+            
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = openDate - now;
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    document.querySelector('.preparing-msg').textContent = "Pintu teleportasi terbuka! Teleporting now... ✨🚀";
+
+                    window.location.href = storeUrl;
+                    return; 
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days < 10 ? "0" + days : days;
+                document.getElementById('hours').textContent = hours < 10 ? "0" + hours : hours;
+                document.getElementById('minutes').textContent = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById('seconds').textContent = seconds < 10 ? "0" + seconds : seconds;
+            }
+
+            const timerInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); 
+        });
+    </script>
 </body>
 </html>
