@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    
+      
     const kodeUnik = Math.floor(Math.random() * 99) + 1;
     const totalFinal = (data.totalAsli || 0) + kodeUnik;
     const orderId = "RBG-" + Math.random().toString(36).substring(2, 8).toUpperCase();

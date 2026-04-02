@@ -114,8 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
         referralGrid.innerHTML = ''; 
         
         REFERRAL_LIST.forEach(code => {
-            const count = globalOrders.filter(order => order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase()).length;
-            const paidOrders = globalOrders.filter(order => order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase() && order.status === 'paid');
+            // FIX: Ganti referralCode jadi referral
+            const count = globalOrders.filter(order => order.referral && order.referral.toLowerCase() === code.toLowerCase()).length;
+            const paidOrders = globalOrders.filter(order => order.referral && order.referral.toLowerCase() === code.toLowerCase() && order.status === 'paid');
             const countPaid = paidOrders.length;
 
             const itemCounts = {};
@@ -171,11 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.getElementById('orders-body');
         tbody.innerHTML = '';
 
-        // Sort orders terbaru di atas (opsional, berdasarkan timestamp jika ada)
+        // FIX: Ganti createdAt jadi timestamp
         orders.sort((a, b) => {
-            const timeA = a.createdAt ? (a.createdAt._seconds || new Date(a.createdAt).getTime()/1000) : 0;
-            const timeB = b.createdAt ? (b.createdAt._seconds || new Date(b.createdAt).getTime()/1000) : 0;
-            return timeB - timeA; // Descending (terbaru di atas)
+            const timeA = a.timestamp ? (a.timestamp._seconds || new Date(a.timestamp).getTime()/1000) : 0;
+            const timeB = b.timestamp ? (b.timestamp._seconds || new Date(b.timestamp).getTime()/1000) : 0;
+            return timeB - timeA; 
         });
 
         if (!orders || orders.length === 0) {
@@ -189,23 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const waLink = `https://wa.me/62${order.wa.replace(/^0/, '')}`;
             const detailPesanan = order.items ? order.items.replace(/\n/g, '<br>') : '-';
 
-            // 1. Logika Waktu (Timestamp)
+            // 1. Logika Waktu (Timestamp) - FIX
             let timeString = '';
-            if (order.createdAt) {
-                // Konversi waktu dari Firebase ke waktu lokal
-                let dateObj = new Date(order.createdAt);
-                if (order.createdAt._seconds) {
-                    dateObj = new Date(order.createdAt._seconds * 1000);
+            if (order.timestamp) {
+                let dateObj = new Date(order.timestamp);
+                if (order.timestamp._seconds) {
+                    dateObj = new Date(order.timestamp._seconds * 1000);
                 }
                 const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
                 const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
                 timeString = `<br><small style="color: var(--text-secondary); font-size: 0.8em; margin-top: 5px; font-weight: 700;">🕒 ${formattedDate}, ${formattedTime}</small>`;
             }
 
-            // 2. Logika Badge Referral
+            // 2. Logika Badge Referral - FIX
             let refBadge = '';
-            if (order.referralCode && order.referralCode !== "TIDAK ADA" && order.referralCode.trim() !== "") {
-                refBadge = `<br><span style="display:inline-block; margin-top:6px; background:var(--accent-purple); color:white; padding:4px 10px; border-radius:8px; font-size:0.75em; font-weight:800;">💎 REF: ${order.referralCode.toUpperCase()}</span>`;
+            if (order.referral && order.referral !== "TIDAK ADA" && order.referral.trim() !== "") {
+                refBadge = `<br><span style="display:inline-block; margin-top:6px; background:var(--accent-purple); color:white; padding:4px 10px; border-radius:8px; font-size:0.75em; font-weight:800;">💎 REF: ${order.referral.toUpperCase()}</span>`;
             }
 
             tr.innerHTML = `
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
     // ACTION: UPDATE & DELETE
-
+    // ==========================================
     async function updateStatus(orderId, newStatus) {
         try {
             const response = await fetch('/api/updatestatus', {

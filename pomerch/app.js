@@ -684,8 +684,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateQuantity(id, newQty);
         }));
         modalCartItemsEl.querySelectorAll('.remove-item-button').forEach(btn => btn.addEventListener('click', () => removeFromCart(btn.dataset.id)));
-        
-        customerReferralInput.value = 'TIDAK ADA';
     }
     
     function updateQuantity(id, newQuantity) {
