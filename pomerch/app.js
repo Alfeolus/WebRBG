@@ -64,7 +64,7 @@ function renderQrCode(qrisString, amount) {
         container.appendChild(mainCanvas);
 
         const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = "⬇️ DOWNLOAD GAMBAR QRIS";
+        downloadBtn.innerHTML = "DOWNLOAD GAMBAR QRIS";
         downloadBtn.className = "action-button glow-btn-pastel";
         downloadBtn.style.marginTop = "20px";
         downloadBtn.onclick = () => {
