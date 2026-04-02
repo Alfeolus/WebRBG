@@ -221,14 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     
     const CAP_MODELS = [
-        { name: "Cap #1", image: "pomerch/images/cap/cap 1.png" },
-        { name: "Cap #2", image: "pomerch/images/cap/cap 2.png" }
+        { name: "Chillin", image: "pomerch/images/cap/cap 1.png" },
+        { name: "Latte", image: "pomerch/images/cap/cap 2.png" }
     ];
 
     const TOTEBAG_MODELS = [
-        { name: "Totebag #1", image: "pomerch/images/Totebag/Totebag 1.png" },
-        { name: "Totebag #2", image: "pomerch/images/Totebag/Totebag 2.png" },
-        { name: "Totebag #3", image: "pomerch/images/Totebag/Totebag 3.png" }
+        { name: "Heaven", image: "pomerch/images/Totebag/Totebag 1.png" },
+        { name: "Flow", image: "pomerch/images/Totebag/Totebag 2.png" },
+        { name: "Dream", image: "pomerch/images/Totebag/Totebag 3.png" }
     ];
 
     const productDatabase = {

@@ -1,26 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-/* Gunakan font yang sedikit lebih tebal dan playful */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
 
 :root {
-    /* Palette Kartun Pop Estetik (High Contrast) */
-    --bg-base: #06090F; /* Deep Space Black */
-    --bg-surface: #FFFFFF; /* Pure White Solid untuk elemen utama */
-    --bg-elevated: #F1F5F9; /* Slate Light */
-    --text-on-dark: #FFFFFF; /* Teks di latar belakang gelap */
-    --text-on-light: #0F172A; /* Slate Ultra Dark untuk teks di elemen putih */
+    --bg-base: #06090F; 
+    --bg-surface: #FFFFFF; 
+    --bg-elevated: #F1F5F9;
+    --text-on-dark: #FFFFFF;
+    --text-on-light: #0F172A; 
     
-    /* Warna Neon Jenuh (Saturated) */
-    --accent-purple: #A855F7; /* Neon Purple */
-    --accent-cyan: #22D3EE; /* Neon Cyan */
-    --accent-orange: #FB923C; /* Neon Orange */
+
+    --accent-purple: #A855F7;
+    --accent-cyan: #22D3EE; 
+    --accent-orange: #FB923C; 
     
     --success: #10B981;
     --danger: #EF4444;
     
-    --border-thick: 3px solid #0F172A; /* Garis tepi tebal kartun */
+    --border-thick: 3px solid #0F172A; 
     --font-main: 'Plus Jakarta Sans', sans-serif;
-    --font-titles: 'Montserrat', sans-serif; /* Font judul tebal kartun */
+    --font-titles: 'Montserrat', sans-serif; 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +31,6 @@ body {
     line-height: 1.6;
 }
 
-/* Latar Belakang Kartun Space Aurora */
 .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; opacity: 0.3; }
 .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 15s linear infinite; }
 .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -150px; right: -150px; }
@@ -62,12 +59,11 @@ body {
 .header-left h1 { 
     font-family: var(--font-titles);
     font-size: 1.6em; font-weight: 900; 
-    color: var(--accent-purple); /* Judul warna neon jenuh */
+    color: var(--accent-purple);
     letter-spacing: -1px; margin: 0; line-height: 1.2; 
 }
 .subtitle { font-size: 0.85em; color: var(--text-on-light); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; opacity: 0.7; }
 
-/* Cart Button (Cartoon Style) */
 .cart-btn-bright {
     background: var(--accent-purple); border: var(--border-thick);
     color: white; padding: 12px 25px; border-radius: 15px;
