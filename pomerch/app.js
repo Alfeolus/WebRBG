@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const NO_COUPLE_DESIGNS = [
-         { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
+        { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
         { name: "Child of God", image: "pomerch/images/kaos/Child of God.png" },
         { name: "Courage to be Disliked", image: "pomerch/images/kaos/Courage to be Disliked.png" },
         { name: "Faith", image: "pomerch/images/kaos/Faith.png" },
@@ -230,11 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     
     const KEYCHAIN_MODELS = [
-        { name: "Joy", image: "pomerch/images/keychain/joy.png" },
-        { name: "Plenger", image: "pomerch/images/keychain/plenger.png" },
-        { name: "Sad", image: "pomerch/images/keychain/sad.png" },
-        { name: "Peanut", image: "pomerch/images/keychain/peanut.png" },
-        { name: "Jelly", image: "pomerch/images/keychain/jelly.png" }
+        { name: "Cute Elio", image: "pomerch/images/keychain/joy.png" },
+        { name: "Dazed Elio", image: "pomerch/images/keychain/plenger.png" },
+        { name: "Sad Elio", image: "pomerch/images/keychain/sad.png" },
+        { name: "Peanut Elio", image: "pomerch/images/keychain/peanut.png" },
+        { name: "Jelly Elio", image: "pomerch/images/keychain/jelly.png" }
     ];
     
     const CAP_MODELS = [
