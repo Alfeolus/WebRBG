@@ -276,6 +276,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS},
                 { name: "Totebag", type: "Totebag", models: TOTEBAG_MODELS}
             ]
+        },
+
+        "Boundless Strength": {
+            basePrice: 128000, type: 'bundle',
+            items: [
+                { name: "Dryfit", type: "Dryfit", designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES }, 
+                { name: "Sticker", type: "Sticker", models: STIKER_MODELS},
+                { name: "Cap", type: "Cap", models: CAP_MODELS}
+            ]
         }
     };
     
@@ -425,7 +434,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 let dbModels = [];
                 if (item.type === 'Stiker') dbModels = STIKER_MODELS;
                 if (item.type === 'Keychain') dbModels = KEYCHAIN_MODELS;
-
+                if (item.type === 'Totebag') dbModels = TOTEBAG_MODELS;
+                if (item.type === 'Cap') dbModels = CAP_MODELS;
                 if (designDropdown && previewImg) { 
                     designDropdown.addEventListener('change', (e) => {
                         const selectedDesignName = e.target.value;
@@ -555,6 +565,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentSelection.product === "Revival Warrior") itemImage = "pomerch/images/revivalwarrior.png";
             else if (currentSelection.product === "Faith Balance") itemImage = "pomerch/images/faithbalance.png";
             else if (currentSelection.product === "Complete in Him") itemImage = "pomerch/images/completeinhim.png";
+            else if (currentSelection.product === "Carry the Light") itemImage = "pomerch/images/carrythelight.png";
+            else if (currentSelection.product === "Boundless Strength") itemImage = "pomerch/images/boundlessstrength.png";
             else itemImage = "pomerch/images/bundleofblessings.png";
         }
 
