@@ -118,13 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const paidOrders = globalOrders.filter(order => order.referralCode && order.referralCode.toLowerCase() === code.toLowerCase() && order.status === 'paid');
             const countPaid = paidOrders.length;
 
-            // Logika baru untuk memecah item berdasarkan pesanan yang sudah PAID
             const itemCounts = {};
             paidOrders.forEach(order => {
                 if (!order.items) return;
                 const itemsList = order.items.split('\n'); 
                 itemsList.forEach(itemLine => {
-                    // Hanya mengambil Nama Barang dan Jumlahnya (Mengabaikan size & desain)
                     const regex = /^(.*?)\s+\(x(\d+)\)/;
                     const match = itemLine.match(regex);
                     if (match) {
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Menyusun HTML untuk Detail Terjual
             let breakdownHtml = '';
             if (Object.keys(itemCounts).length > 0) {
                 breakdownHtml = '<div style="margin-top: 15px; border-top: 2px dashed #CBD5E1; padding-top: 10px;">';
@@ -174,6 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const tbody = document.getElementById('orders-body');
         tbody.innerHTML = '';
 
+        // Sort orders terbaru di atas (opsional, berdasarkan timestamp jika ada)
+        orders.sort((a, b) => {
+            const timeA = a.createdAt ? (a.createdAt._seconds || new Date(a.createdAt).getTime()/1000) : 0;
+            const timeB = b.createdAt ? (b.createdAt._seconds || new Date(b.createdAt).getTime()/1000) : 0;
+            return timeB - timeA; // Descending (terbaru di atas)
+        });
+
         if (!orders || orders.length === 0) {
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 50px;">Belum ada pesanan yang masuk.</td></tr>';
             return;
@@ -185,14 +189,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const waLink = `https://wa.me/62${order.wa.replace(/^0/, '')}`;
             const detailPesanan = order.items ? order.items.replace(/\n/g, '<br>') : '-';
 
-            // Menambahkan Badge Referral di bawah Nama Pemesan jika mereka memakai kode referral
+            // 1. Logika Waktu (Timestamp)
+            let timeString = '';
+            if (order.createdAt) {
+                // Konversi waktu dari Firebase ke waktu lokal
+                let dateObj = new Date(order.createdAt);
+                if (order.createdAt._seconds) {
+                    dateObj = new Date(order.createdAt._seconds * 1000);
+                }
+                const formattedDate = dateObj.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                const formattedTime = dateObj.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                timeString = `<br><small style="color: var(--text-secondary); font-size: 0.8em; margin-top: 5px; font-weight: 700;">🕒 ${formattedDate}, ${formattedTime}</small>`;
+            }
+
+            // 2. Logika Badge Referral
             let refBadge = '';
             if (order.referralCode && order.referralCode !== "TIDAK ADA" && order.referralCode.trim() !== "") {
-                refBadge = `<br><span style="display:inline-block; margin-top:6px; background:var(--accent-purple); color:white; padding:3px 8px; border-radius:6px; font-size:0.75em; font-weight:800;">💎 REF: ${order.referralCode.toUpperCase()}</span>`;
+                refBadge = `<br><span style="display:inline-block; margin-top:6px; background:var(--accent-purple); color:white; padding:4px 10px; border-radius:8px; font-size:0.75em; font-weight:800;">💎 REF: ${order.referralCode.toUpperCase()}</span>`;
             }
 
             tr.innerHTML = `
-                <td data-label="Order ID"><strong>${order.id}</strong></td>
+                <td data-label="Order ID">
+                    <strong>${order.id}</strong>
+                    ${timeString}
+                </td>
                 <td data-label="Pemesan">
                     ${order.nama} <br><small style="color:var(--text-secondary);">${order.kelas}</small>
                     ${refBadge}
@@ -237,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
     // ACTION: UPDATE & DELETE
-    // ==========================================
+
     async function updateStatus(orderId, newStatus) {
         try {
             const response = await fetch('/api/updatestatus', {
