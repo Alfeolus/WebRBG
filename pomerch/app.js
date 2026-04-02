@@ -205,19 +205,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const DRYFIT_SIZES = ["S", "M", "L", "XL", "XXL [+5K]"]; 
     
     const STIKER_MODELS = [
-        { name: "Snoopy", image: "pomerch/images/stiker/snoopy.png" },
-        { name: "Poster Font", image: "pomerch/images/stiker/font.png" },
-        { name: "Maskot AOG", image: "pomerch/images/stiker/maskot.png" },
-        { name: "Labels", image: "pomerch/images/stiker/labels.png" },
-        { name: "F1", image: "pomerch/images/stiker/f1.png" }
+        { name: "Sinchan", image: "pomerch/images/stiker/sinchan.png" },
+        { name: "Meme's", image: "pomerch/images/stiker/meme.png" },
+        { name: "Random's", image: "pomerch/images/stiker/randoms.png" },
+        { name: "Restored", image: "pomerch/images/stiker/restored.png" },
+        { name: "Alphabet", image: "pomerch/images/stiker/alphabet.png" },
+        { name: "Elio", image: "pomerch/images/stiker/elio.png" }
     ];
     
     const KEYCHAIN_MODELS = [
-        { name: "Wee", image: "pomerch/images/keychain/wee.png" },
-        { name: "Snowglobe", image: "pomerch/images/keychain/snowglobe.png" },
-        { name: "GWS", image: "pomerch/images/keychain/GWS.png" },
-        { name: "Couple 1", image: "pomerch/images/keychain/couple edition 1.png" },
-        { name: "Couple 2", image: "pomerch/images/keychain/couple edition 2.png" }
+        { name: "Joy", image: "pomerch/images/keychain/joy.png" },
+        { name: "Plenger", image: "pomerch/images/keychain/plenger.png" },
+        { name: "Sad", image: "pomerch/images/keychain/sad.png" },
+        { name: "Peanut", image: "pomerch/images/keychain/peanut.png" },
+        { name: "Jelly", image: "pomerch/images/keychain/jelly.png" }
     ];
     
     const CAP_MODELS = [
