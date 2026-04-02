@@ -25,7 +25,9 @@
 
         body { 
             font-family: var(--font-main); 
-            background-color: var(--bg-base); 
+            background: linear-gradient(-45deg, #06090F, #1a0b2e, #0a192f, #23120b);
+            background-size: 400% 400%;
+            animation: gradientBG 5s ease infinite;
             color: var(--bg-surface); 
             display: flex; 
             justify-content: center; 
@@ -34,12 +36,28 @@
             overflow: hidden; 
             padding: 20px;
         }
-        .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.25; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 15s linear infinite; }
-        .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -150px; right: -150px; }
-        .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -100px; left: -150px; animation-delay: -5s; }
+
+        /* Keyframes untuk Background Mengalir */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Latar Belakang Kartun Space Aurora yang Lebih Hidup */
+        .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.35; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+        .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -10%; right: -10%; }
+        .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -10%; left: -10%; animation-delay: -5s; }
         .blob-orange { background-color: var(--accent-orange); width: 400px; height: 400px; top: 40%; left: 30%; animation-delay: -10s; }
-        @keyframes blob-float { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(40px) scale(1.05); } }
+        
+        /* Keyframes Blobs Bergerak Ke Segala Arah */
+        @keyframes blob-float { 
+            0% { transform: translate(0, 0) scale(1); } 
+            33% { transform: translate(50px, -50px) scale(1.1); } 
+            66% { transform: translate(-30px, 40px) scale(0.9); } 
+            100% { transform: translate(20px, 20px) scale(1.05); } 
+        }
 
         .opening-card {
             background: var(--bg-surface);
@@ -53,7 +71,7 @@
             position: relative;
             z-index: 10;
             color: var(--text-on-light);
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
@@ -94,9 +112,7 @@
         .time-box span { font-size: 2.2em; font-weight: 800; color: var(--bg-surface); display: block; }
         .time-box small { font-size: 0.65em; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; }
 
-
         .preparing-msg { font-size: 0.9em; font-weight: 700; color: #333; margin-top: 10px; }
-        
 
         .manual-link { font-size: 0.75em; color: var(--text-on-light); margin-top: 20px; display: block; font-weight: 600; text-decoration: none; border: 2px solid transparent; padding: 5px 10px; border-radius: 8px; transition: 0.15s ease; }
         .manual-link a { color: var(--accent-cyan); text-decoration: none; font-weight: 800; }
