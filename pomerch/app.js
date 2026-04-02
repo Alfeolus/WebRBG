@@ -48,25 +48,21 @@ function renderQrCode(qrisString, amount) {
 
         ctx.drawImage(tempCanvas, 0, 0);
 
-        // Tambahkan Teks Instruksi
-        ctx.fillStyle = "#0F172A"; // Warna Slate Dark
+        ctx.fillStyle = "#0F172A"; 
         ctx.font = "bold 40px Arial";
         ctx.textAlign = "center";
         ctx.fillText("TRANSFER SESUAI NOMINAL:", mainCanvas.width / 2, 860);
         
-        // Tambahkan Angka Nominal Besar & Merah
         ctx.fillStyle = "#EF4444"; 
         ctx.font = "900 75px Arial";
         ctx.fillText(formatRupiah(amount), mainCanvas.width / 2, 950);
 
-        // Tampilkan hasil ke layar pembeli
         mainCanvas.style.width = "100%";
         mainCanvas.style.height = "auto";
         mainCanvas.style.border = "3px solid #000";
         mainCanvas.style.borderRadius = "15px";
         container.appendChild(mainCanvas);
 
-        // 3. Buat Tombol Download Otomatis di bawah gambar
         const downloadBtn = document.createElement('button');
         downloadBtn.innerHTML = "⬇️ DOWNLOAD GAMBAR QRIS";
         downloadBtn.className = "action-button glow-btn-pastel";
@@ -132,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalQtyUp = document.getElementById('modal-qty-up');
     const modalQtyInput = document.getElementById('modal-qty-input');
     
-    // Elemen Keranjang Multi-Step
     const cartIconButton = document.getElementById('cart-icon-button');
     const cartCountEl = document.getElementById('cart-count');
     const cartModal = document.getElementById('cart-modal');
@@ -150,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartModalTitle = document.getElementById('cart-modal-title');
     
     const customerReferralInput = document.getElementById('customer-referral');
-    const referralSuggestions = document.getElementById('referral-suggestions');
     const checkoutButton = document.getElementById('checkout-button');
     
     const alertModal = document.getElementById('alert-modal');
@@ -171,8 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = [];
     let currentOrderData = null; 
     let currentSelection = { product: null, basePrice: 0, type: 'satuan', design: null, size: null, bundleOptions: [] };
-    
-    const REFERRAL_CODES = ["Love", "Faithfull", "Patience", "Joy", "Kindness", "Peace", "Goodness"];
 
     const KAOS_DESIGNS = [
         { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
@@ -278,7 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Totebag", type: "Totebag", models: TOTEBAG_MODELS}
             ]
         },
-
         "Boundless Strength": {
             basePrice: 128000, type: 'bundle',
             items: [
@@ -287,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Cap", type: "Cap", models: CAP_MODELS}
             ]
         },
-
         "Shared Grace": {
             basePrice: 184000, type: 'bundle',
             items: [
@@ -445,6 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item.type === 'Keychain') dbModels = KEYCHAIN_MODELS;
                 if (item.type === 'Totebag') dbModels = TOTEBAG_MODELS;
                 if (item.type === 'Cap') dbModels = CAP_MODELS;
+                
                 if (designDropdown && previewImg) { 
                     designDropdown.addEventListener('change', (e) => {
                         const selectedDesignName = e.target.value;
@@ -576,6 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (currentSelection.product === "Complete in Him") itemImage = "pomerch/images/completeinhim.png";
             else if (currentSelection.product === "Carry the Light") itemImage = "pomerch/images/carrythelight.png";
             else if (currentSelection.product === "Boundless Strength") itemImage = "pomerch/images/boundlessstrength.png";
+            else if (currentSelection.product === "Shared Grace") itemImage = "pomerch/images/sharedgrace.png";
             else itemImage = "pomerch/images/bundleofblessings.png";
         }
 
@@ -694,9 +686,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
         modalCartItemsEl.querySelectorAll('.remove-item-button').forEach(btn => btn.addEventListener('click', () => removeFromCart(btn.dataset.id)));
         
-        customerReferralInput.value = '';
-        referralSuggestions.innerHTML = '';
-        referralSuggestions.style.display = 'none';
+        // Reset Dropdown Referral saat Buka Keranjang
+        customerReferralInput.value = 'TIDAK ADA';
     }
     
     function updateQuantity(id, newQuantity) {
@@ -708,58 +699,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cart = cart.filter(i => i.id !== id);
         renderCart();
     }
-    
-    customerReferralInput.addEventListener('input', () => {
-        const inputText = customerReferralInput.value.toLowerCase();
-        referralSuggestions.innerHTML = '';
-        
-        if (inputText.length === 0) {
-            referralSuggestions.style.display = 'none';
-            return;
-        }
-
-        const filteredCodes = REFERRAL_CODES.filter(code => code.toLowerCase().startsWith(inputText));
-
-        if (filteredCodes.length > 0) {
-            filteredCodes.forEach(code => {
-                const suggestionDiv = document.createElement('div');
-                suggestionDiv.innerText = code;
-                suggestionDiv.addEventListener('click', () => {
-                    customerReferralInput.value = code;
-                    referralSuggestions.innerHTML = '';
-                    referralSuggestions.style.display = 'none';
-                });
-                referralSuggestions.appendChild(suggestionDiv);
-            });
-            referralSuggestions.style.display = 'block';
-        } else {
-            referralSuggestions.style.display = 'none';
-        }
-    });
-
-    document.addEventListener('click', (e) => {
-        if (e.target !== customerReferralInput) {
-            referralSuggestions.style.display = 'none';
-        }
-    });
 
     checkoutButton.addEventListener('click', async () => { 
         try {
             const customerName = customerNameInput.value.trim();
             const customerPhone = customerPhoneInput.value.trim();
             const customerClass = customerClassInput.value;
-            const referralCodeRaw = customerReferralInput.value.trim();
-            let validReferralCode = "TIDAK ADA"; 
-
-            const foundCode = REFERRAL_CODES.find(code => code.toLowerCase() === referralCodeRaw.toLowerCase());
-
-            if (referralCodeRaw.length > 0) {
-                if (foundCode) {
-                    validReferralCode = foundCode; 
-                } else {
-                    throw new Error("Kode Referral tidak valid. (Coba: Lion, Peacock, dll.)");
-                }
-            }
+            // LANGSUNG AMBIL VALUE DARI DROPDOWN
+            const validReferralCode = customerReferralInput.value; 
 
             const phoneRegex = /^[0-9]{8,15}$/; 
             let errorMessage = "";
@@ -825,7 +772,7 @@ document.addEventListener('DOMContentLoaded', () => {
             customerNameInput.value = '';
             customerPhoneInput.value = '';
             customerClassInput.value = '';
-            customerReferralInput.value = '';
+            customerReferralInput.value = 'TIDAK ADA';
 
             currentOrderData = { 
                 orderId: data.orderId, 
@@ -841,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             showValidationError('Terjadi kesalahan: ' + err.message);
             checkoutButton.disabled = false;
-            checkoutButton.textContent = 'Proses Pesanan';
+            checkoutButton.textContent = 'Proses Pesanan Sekarang!';
         }
     });
 
