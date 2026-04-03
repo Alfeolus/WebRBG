@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         "Carry the Light": {
-            basePrice: 270000, type: 'bundle',
+            basePrice: 123000, type: 'bundle',
             items: [
                 { name: "Kaos", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
                 { name: "Keychain", type: "Keychain", models: KEYCHAIN_MODELS},
