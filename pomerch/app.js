@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         "Complete in Him": {
-            basePrice: 270000, type: 'bundle',
+            basePrice: 276000, type: 'bundle',
             items: [
                 { name: "Kaos I", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
                 { name: "Kaos II", type: "Kaos", designs: NO_COUPLE_DESIGNS, sizes: KAOS_SIZES }, 
