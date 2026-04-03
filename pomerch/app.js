@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const productDatabase = {
-        "Kaos": { basePrice: 95000, type: 'satuan', designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
+        "Kaos": { basePrice: 2000, type: 'satuan', designs: KAOS_DESIGNS, sizes: KAOS_SIZES },
         "Dryfit": { basePrice: 92000, type: 'satuan', designs: DRYFIT_DESIGNS, sizes: DRYFIT_SIZES },
         "Stiker": { basePrice: 5000, type: 'satuan', models: STIKER_MODELS },
         "Keychain": { basePrice: 8000, type: 'satuan', models: KEYCHAIN_MODELS },
