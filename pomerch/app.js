@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const CAP_MODELS = [
         { name: "Chillin", image: "pomerch/images/cap/cap 1.png" },
-        { name: "Latte", image: "pomerch/images/cap/cap 2.png" }
+        { name: "Late", image: "pomerch/images/cap/cap 2.png" }
     ];
 
     const TOTEBAG_MODELS = [
