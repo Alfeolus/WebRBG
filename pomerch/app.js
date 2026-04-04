@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let itemHtml = `<div class="bundle-item-group" id="${itemGroupId}"><strong>${item.name}</strong>`;
                 
                 let placeholderImg = "images/placeholder-design.png"; 
-                if (item.type === 'Stiker') placeholderImg = "pomerch/images/stiker/stiker-preview.png";
+                if (item.type === 'Stiker') placeholderImg = "pomerch/images/stiker/sticker-preview.png";
                 if (item.type === 'Keychain') placeholderImg = "pomerch/images/keychain/keychain-preview.png";
                 if (item.type === 'Dryfit') placeholderImg = "pomerch/images/dryfit/dryfit-preview.png";
                 if (item.type === 'Kaos') placeholderImg = "pomerch/images/kaos/kaos-preview.png";
