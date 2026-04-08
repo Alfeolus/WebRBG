@@ -64,7 +64,7 @@ function renderQrCode(qrisString, amount) {
         container.appendChild(mainCanvas);
 
         const downloadBtn = document.createElement('button');
-        downloadBtn.innerHTML = "DOWNLOAD GAMBAR QRIS";
+        downloadBtn.innerHTML = "⬇️ DOWNLOAD GAMBAR QRIS";
         downloadBtn.className = "action-button glow-btn-pastel";
         downloadBtn.style.marginTop = "20px";
         downloadBtn.onclick = () => {
@@ -165,6 +165,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = [];
     let currentOrderData = null; 
     let currentSelection = { product: null, basePrice: 0, type: 'satuan', design: null, size: null, bundleOptions: [] };
+
+    const savedPendingOrder = localStorage.getItem('pendingOrderRBG');
+    if (savedPendingOrder) {
+        try {
+            currentOrderData = JSON.parse(savedPendingOrder);
+            qrisAmountEl.textContent = formatRupiah(currentOrderData.finalAmount);
+            qrisOrderIdEl.textContent = currentOrderData.orderId;
+            qrisModal.style.display = 'flex';
+            renderQrCode(currentOrderData.qrisString, currentOrderData.finalAmount);
+        } catch (e) {
+            console.error("Gagal memuat pesanan tertunda", e);
+            localStorage.removeItem('pendingOrderRBG');
+        }
+    }
+    // ==========================================
 
     const KAOS_DESIGNS = [
         { name: "About You", image: "pomerch/images/kaos/About You.png" }, 
@@ -784,6 +799,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 itemsString: itemsString,
                 qrisString: data.qrisString 
             };
+
+            localStorage.setItem('pendingOrderRBG', JSON.stringify(currentOrderData));
+
             
             alertAmountEl.textContent = formatRupiah(data.finalAmount);
             alertModal.style.display = 'flex';
@@ -805,6 +823,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 orderId: currentOrderData.orderId
             };
             localStorage.setItem('lastOrderData', JSON.stringify(successData));
+            
+            localStorage.removeItem('pendingOrderRBG');
+
         }
         
         let successUrl = '/payment-success.html';
@@ -837,9 +858,25 @@ document.addEventListener('DOMContentLoaded', () => {
         checkoutButton.disabled = false;
         checkoutButton.textContent = 'Proses Pesanan Sekarang!';
     });
+
+    closeQrisModalButton.addEventListener('click', () => { 
+        if(confirm("Yakin ingin membatalkan pesanan ini?\n\nJika dibatalkan, Anda harus memasukkan pesanan dari awal lagi.")) {
+            qrisModal.style.display = 'none'; 
+            localStorage.removeItem('pendingOrderRBG'); // Bersihkan data anti-refresh
+            currentOrderData = null;
+        }
+    });
     
-    closeQrisModalButton.addEventListener('click', () => { qrisModal.style.display = 'none'; });
-    qrisModal.addEventListener('click', (e) => { if (e.target === qrisModal) qrisModal.style.display = 'none'; });
+    qrisModal.addEventListener('click', (e) => { 
+        if (e.target === qrisModal) {
+            if(confirm("Yakin ingin membatalkan pesanan ini?\n\nJika dibatalkan, Anda harus memasukkan pesanan dari awal lagi.")) {
+                qrisModal.style.display = 'none';
+                localStorage.removeItem('pendingOrderRBG'); // Bersihkan data anti-refresh
+                currentOrderData = null;
+            }
+        } 
+    });
+    // ==========================================
     
     closeValidationModalButton.addEventListener('click', () => { validationModal.style.display = 'none'; });
     validationOkButton.addEventListener('click', () => { validationModal.style.display = 'none'; });

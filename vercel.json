@@ -8,6 +8,9 @@
     {
       "source": "/adminaja",
       "destination": "/pomerch/admin-jojo.html"
+    },
+    {
+      
     }
   ]
 }

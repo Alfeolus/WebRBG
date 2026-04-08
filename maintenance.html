@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Maintenance - RBG Merch</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #06090F; 
+            --bg-surface: #FFFFFF; 
+            --text-on-light: #0F172A; 
+            --accent-purple: #A855F7; 
+            --accent-cyan: #22D3EE; 
+            --border-thick: 3px solid #0F172A; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: linear-gradient(-45deg, #06090F, #1a0b2e, #0a192f, #23120b);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: var(--bg-surface); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow: hidden; 
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .pastel-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.35; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: blob-float 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95); }
+        .blob-purple { background-color: var(--accent-purple); width: 600px; height: 600px; top: -10%; right: -10%; }
+        .blob-cyan { background-color: var(--accent-cyan); width: 500px; height: 500px; bottom: -10%; left: -10%; animation-delay: -5s; }
+
+        @keyframes blob-float { 
+            0% { transform: translate(0, 0) scale(1); } 
+            100% { transform: translate(20px, 20px) scale(1.05); } 
+        }
+
+        .maintenance-card {
+            background: var(--bg-surface);
+            border: var(--border-thick);
+            border-radius: 30px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 15px 15px 0 rgba(34, 211, 238, 0.4); 
+            color: var(--text-on-light);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .icon-gear { font-size: 4em; margin-bottom: 10px; display: inline-block; animation: spin 4s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 2em; color: var(--text-on-light); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 10px; }
+        p.subtitle { font-size: 1em; font-weight: 600; color: #64748B; line-height: 1.5; }
+        .highlight { color: var(--accent-purple); font-weight: 900; }
+    </style>
+</head>
+<body>
+
+    <div class="pastel-blobs">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+    </div>
+
+    <div class="maintenance-card">
+        <div class="icon-gear">⚙️</div>
+        <h1>SYSTEM <span class="highlight">UPDATE</span></h1>
+        <p class="subtitle">Sabar ya! Kita lagi <br>benerin sesuatu</p>
+        <p class="subtitle" style="margin-top: 20px; font-size: 0.85em;">Coba cek lagi dalam beberapa saat 🚀</p>
+    </div>
+
+</body>
+</html>
