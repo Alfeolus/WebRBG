@@ -1,17 +1,5 @@
 {
   "cleanUrls": true,
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/maintenance.html",
-      "permanent": false
-    },
-    {
-      "source": "/pomerch/index.html",
-      "destination": "/maintenance.html",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/",
