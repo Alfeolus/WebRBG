@@ -3,14 +3,14 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/pomerch/index.html"
+      "destination": "maintenance.html"
     },
     {
       "source": "/adminaja",
       "destination": "/pomerch/admin-jojo.html"
     },
     {
-      
+
     }
   ]
 }
