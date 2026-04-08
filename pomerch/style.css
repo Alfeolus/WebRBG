@@ -420,3 +420,47 @@ body {
         font-size: 1.3em;
     }
 }
+
+.wa-float-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--success); 
+    color: white;
+    border: var(--border-thick);
+    padding: 12px 22px;
+    border-radius: 50px; 
+    font-weight: 800;
+    font-size: 1.1em;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+    z-index: 999;
+    transition: 0.15s ease-out;
+}
+
+.wa-float-btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 rgba(0,0,0,0.2);
+    background: #059669;
+}
+
+.wa-float-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0 rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .wa-float-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 18px;
+        font-size: 0.9em;
+        box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    }
+}
