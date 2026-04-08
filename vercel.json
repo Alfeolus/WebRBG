@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/pomerch/index.html"
+    },
+    {
+      "source": "/adminaja",
+      "destination": "/pomerch/admin-jojo.html"
+    },
+    {
+      
+    }
+  ]
+}
