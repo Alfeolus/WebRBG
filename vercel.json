@@ -1,16 +1,14 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
-      "destination": "maintenance.html"
+      "destination": "/maintenance.html",
+      "permanent": false
     },
     {
-      "source": "/adminaja",
-      "destination": "/pomerch/admin-jojo.html"
-    },
-    {
-
+      "source": "/pomerch/index.html",
+      "destination": "/maintenance.html",
+      "permanent": false
     }
   ]
 }
