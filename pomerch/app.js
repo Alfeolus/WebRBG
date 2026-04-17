@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let discountLabel = 'Total Pembayaran';
         
         if (isHMinus1 && total >= 300000) {
-            const discount = total * 0.10;
+            const discount = total * 0.05;
             finalTotal = total - discount;
             discountLabel = `Total Pembayaran <br><small style="color: var(--success); font-size: 0.7em;">(Diskon 10% Diterapkan!)</small>`;
 
