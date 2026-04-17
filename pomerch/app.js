@@ -84,7 +84,7 @@ function renderQrCode(qrisString, amount) {
 document.addEventListener('DOMContentLoaded', () => {
     
     const BACKEND_API_URL = '/api/submitmerch';
-    const targetDate = new Date("Apr 18, 2026 00:00:00").getTime();
+    const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCartItemsEl.innerHTML = '';
         let total = 0;
         const now = new Date().getTime();
-        const targetDate = new Date("Apr 18, 2026 00:00:00").getTime();
+        const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
         const distance = targetDate - now;
         const isHMinus1 = distance > 0 && distance <= (24 * 60 * 60 * 1000);
         
@@ -783,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let totalAsliKeranjang = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
             const now = new Date().getTime();
-            const targetDate = new Date("Apr 18, 2026 00:00:00").getTime();
+            const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
             const distance = targetDate - now;
             const isHMinus1 = distance > 0 && distance <= (24 * 60 * 60 * 1000);
             
