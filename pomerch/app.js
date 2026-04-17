@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalCartItemsEl.innerHTML = '';
         let total = 0;
         const now = new Date().getTime();
-        const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
+        const targetDate = new Date("Apr 18, 2026 00:00:00").getTime();
         const distance = targetDate - now;
         const isHMinus1 = distance > 0 && distance <= (24 * 60 * 60 * 1000);
         
