@@ -704,7 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isHMinus1 && total >= 300000) {
             const discount = total * 0.05;
             finalTotal = total - discount;
-            discountLabel = `Total Pembayaran <br><small style="color: var(--success); font-size: 0.7em;">(Diskon 10% Diterapkan!)</small>`;
+            discountLabel = `Total Pembayaran <br><small style="color: var(--success); font-size: 0.7em;">(Diskon 5% Berhasil!)</small>`;
 
             modalCartTotalEl.innerHTML = `<span style="text-decoration: line-through; font-size: 0.6em; color: rgba(255,255,255,0.6); display: block; text-align: right;">${formatRupiah(total)}</span>${formatRupiah(finalTotal)}`;
         } else {
@@ -713,7 +713,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const totalLabelEl = document.querySelector('.cart-total-box span');
         if (totalLabelEl) totalLabelEl.innerHTML = discountLabel;
-        // ==========================================
         
         cartCountEl.textContent = cart.length;
         
