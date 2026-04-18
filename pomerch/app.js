@@ -655,19 +655,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    function renderCart() {
+function renderCart() {
         modalCartItemsEl.innerHTML = '';
         let total = 0;
-        const now = new Date().getTime();
-        const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
-        const distance = targetDate - now;
-        const isHMinus1 = distance > 0 && distance <= (24 * 60 * 60 * 1000);
-        
-        const promoBanner = document.getElementById('promo-banner');
-        if (promoBanner) {
-            promoBanner.style.display = isHMinus1 ? 'block' : 'none';
-        }
-
 
         if (cart.length === 0) { modalCartItemsEl.innerHTML = '<p style="text-align: center; padding: 20px 0; color: var(--text-secondary); font-weight: 700;">Keranjang Anda kosong.</p>'; }
         cart.forEach(item => {
@@ -698,21 +688,10 @@ document.addEventListener('DOMContentLoaded', () => {
             total += item.price * item.quantity;
         });
         
-        let finalTotal = total;
-        let discountLabel = 'Total Pembayaran';
-        
-        if (isHMinus1 && total >= 300000) {
-            const discount = total * 0.05;
-            finalTotal = total - discount;
-            discountLabel = `Total Pembayaran <br><small style="color: var(--success); font-size: 0.7em;">(Diskon 5% Berhasil!)</small>`;
-
-            modalCartTotalEl.innerHTML = `<span style="text-decoration: line-through; font-size: 0.6em; color: rgba(255,255,255,0.6); display: block; text-align: right;">${formatRupiah(total)}</span>${formatRupiah(finalTotal)}`;
-        } else {
-            modalCartTotalEl.innerHTML = formatRupiah(finalTotal);
-        }
+        modalCartTotalEl.innerHTML = formatRupiah(total);
         
         const totalLabelEl = document.querySelector('.cart-total-box span');
-        if (totalLabelEl) totalLabelEl.innerHTML = discountLabel;
+        if (totalLabelEl) totalLabelEl.innerHTML = 'Total Pembayaran';
         
         cartCountEl.textContent = cart.length;
         
@@ -780,23 +759,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 } 
                 return detail; 
             }).join('\n');
-            let totalAsliKeranjang = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
-            const now = new Date().getTime();
-            const targetDate = new Date("Apr 20, 2026 00:00:00").getTime();
-            const distance = targetDate - now;
-            const isHMinus1 = distance > 0 && distance <= (24 * 60 * 60 * 1000);
-            
-            if (isHMinus1 && totalAsliKeranjang >= 300000) {
-                totalAsliKeranjang = totalAsliKeranjang - (totalAsliKeranjang * 0.05);
-            }
+            const totalAsli = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
             const orderData = {
                 nama: customerName,
                 telepon: customerPhone,
                 kelas: customerClass,
                 itemsString: itemsString,
-                totalAsli: totalAsliKeranjang,
+                totalAsli: totalAsli,
                 referralCode: validReferralCode 
             };
             
