@@ -3,266 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PO Merch Close</title>
+    <title>PO Merch Closed - Restored By God</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     
-    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dist/dotlottie-player.mjs" type="module"></script>
 
     <style>
-        * { box-sizing: border-box; }
-
         :root {
-            --bg-primary: #0a0a0a; 
-            --bg-glass: rgba(30, 30, 30, 0.65); 
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --accent-blue: #00aaff;
-            --accent-red: #ff3333; 
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --bg-base: #06090F; 
+            --bg-surface: #FFFFFF; 
+            --text-on-dark: #FFFFFF;
+            --accent-purple: #A855F7;
+            --accent-cyan: #22D3EE; 
+            --accent-orange: #FB923C; 
+            --border-thick: 3px solid #0F172A; 
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-titles: 'Montserrat', sans-serif; 
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body { 
-            font-family: 'Poppins', sans-serif; 
-            text-align: center; 
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-primary);
-            background: radial-gradient(circle at 50% 0%, #1a2a3a 0%, #0a0a0a 100%);
-            color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            width: 100vw;
+            font-family: var(--font-main); 
+            background-color: var(--bg-base);
+            color: var(--text-on-dark);
             overflow: hidden; 
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        .snowflake {
+        .pastel-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            filter: blur(80px);
+            opacity: 0.7;
+        }
+
+        .blob {
             position: absolute;
-            top: -10px;
-            background-color: #fff;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
+            animation: move 20s infinite alternate ease-in-out;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0); opacity: 1; }
-            100% { transform: translateY(110vh) translateX(20px); opacity: 0.3; }
+        .blob-purple { 
+            background: var(--accent-purple); 
+            width: 500px; height: 500px; 
+            top: -10%; left: -10%; 
+            animation-duration: 18s;
+        }
+
+        .blob-cyan { 
+            background: var(--accent-cyan); 
+            width: 450px; height: 450px; 
+            bottom: -5%; right: -5%; 
+            animation-duration: 25s;
+            animation-delay: -2s;
+        }
+
+        .blob-orange { 
+            background: var(--accent-orange); 
+            width: 350px; height: 350px; 
+            top: 40%; left: 50%; 
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
         .container {
+            width: 92%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 30px;
+            border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            text-align: center;
             position: relative;
-            z-index: 10; 
-            width: 90%;
-            max-width: 450px; 
-            padding: 0; 
-            
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            
-            border-radius: 20px; 
-            border: 1px solid var(--border-glass);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6); 
-            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden; 
-        }
-        dotlottie-player {
-            width: 130%; 
-            margin-left: -15%; 
-            
-            height: auto; 
-            margin-bottom: 0;
-            display: block;
-            margin-top: -10px;
-        }
-        .text-wrapper {
-            width: 100%;
-            padding: 5px 30px 40px 30px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 20;
+            z-index: 10;
         }
 
-        h1 { 
-            font-size: 2.2em;
+        h1 {
+            font-family: var(--font-titles);
             font-weight: 900;
-            margin-bottom: 10px;
-            margin-top: 0;
-            line-height: 1.2;
-            color: var(--accent-red);
+            font-size: 2.2em;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+        }
+
+        .status-tag {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: #000;
+            padding: 6px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.85em;
+            margin-bottom: 25px;
+            border: 2px solid #000;
+            transform: rotate(-1.5deg);
+        }
+
+        .lottie-box {
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto 25px;
         }
 
         .message {
-            font-size: 1em;
-            color: var(--text-secondary); 
+            font-size: 1.1em;
             line-height: 1.5;
-            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 35px;
         }
 
         .highlight {
-            color: var(--text-primary);
+            color: var(--accent-cyan);
             font-weight: 700;
-            text-decoration: underline decoration-color(var(--accent-blue)) 3px;
-            text-underline-offset: 4px;
         }
 
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
-            margin: 20px 0;
-            width: 100%;
-        }
-
-        .info-box {
-            background: rgba(0, 170, 255, 0.1);
-            border: 1px solid rgba(0, 170, 255, 0.3);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: #66c2ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .info-box::before {
-            content: '❄️'; font-size: 1.2em;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 14px 20px;
+        .btn-instagram {
+            display: inline-block;
+            background: var(--bg-surface);
+            color: #000;
             text-decoration: none;
-            border-radius: 12px;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-family: var(--font-titles);
+            text-transform: uppercase;
+            border: var(--border-thick);
+            box-shadow: 5px 5px 0px var(--accent-purple);
+            transition: 0.2s ease;
+        }
+
+        .btn-instagram:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px var(--accent-purple);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.8em;
+            opacity: 0.4;
             font-weight: 600;
-            font-size: 0.95em;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border-glass);
-            color: var(--text-secondary);
-        }
-
-        .fade-in {
-            animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @media screen and (max-width: 600px) {
-            .container {
-                width: 90%;
-            }
-            .text-wrapper {
-                padding: 5px 20px 30px 20px;
-            }
-            
-            h1 { font-size: 1.8em; }
-            .info-box { font-size: 0.8em; }
-            .message { font-size: 0.9em; }
-            .btn { font-size: 0.9em; padding: 12px; }
-        }
-
-        @media screen and (max-height: 750px) {
-            dotlottie-player { width: 100%; margin-left: 0; margin-bottom: 0; margin-top: 0; }
-            .text-wrapper { padding: 10px 20px 20px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container fade-in">
-        
-        <dotlottie-player 
-            src="https://lottie.host/fe3d3a62-1223-40ec-b7a8-3b83eb9fdabe/B9EW0st4CQ.lottie" 
-            background="transparent" 
-            speed="1" 
-            loop 
-            autoplay>
-        </dotlottie-player>
-        
-        <div class="text-wrapper">
-            
-            <h1>PO Close!!</h1>
-            
-            <div class="info-box">
-                PO Merch Ark Of Grace Udah close!!
-            </div>
-            
-            <p class="message">
-                Pesanan kalian sedang dalam tahap <span class="highlight">Proses </span>yaa!!
-            </p>
-
-            <div class="divider"></div>
-
-            <p class="message" style="font-size: 0.9em; opacity: 0.8;">
-                See You di Acara Ark Of Grace!!
-            </p>
-
-            <div class="button-group">
-                <a href="https://instagram.com/natal.pptippbp" class="btn btn-primary" target="_blank">
-                    Pantau Terus instagram AOG
-                </a>
-            </div>
-
-        </div>
-
+    <div class="pastel-blobs">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+        <div class="blob blob-orange"></div>
     </div>
 
-    <script>
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            const size = Math.random() * 3 + 2 + 'px';
-            snowflake.style.width = size;
-            snowflake.style.height = size;
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            const duration = Math.random() * 7 + 2 + 's';
-            snowflake.style.animation = `fall ${duration} linear infinite`;
-            snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-            document.body.appendChild(snowflake);
-            setTimeout(() => { snowflake.remove(); }, parseFloat(duration) * 1000);
-        }
-        setInterval(createSnowflake, 50); 
-    </script>
+    <div class="container">
+        <h1>RESTORED BY GOD</h1>
+        <div class="status-tag">PRE-ORDER CLOSED</div>
+
+        <div class="lottie-box">
+            <dotlottie-player 
+                src="https://lottie.host/82672a83-a442-4b2e-9d29-c99459585697/mD4m3H5j9K.json" 
+                background="transparent" 
+                speed="1" 
+                loop 
+                autoplay>
+            </dotlottie-player>
+        </div>
+
+        <p class="message">
+            Waduh, pemesanan sudah ditutup!<br>
+            Saat ini semua pesanan sedang dalam <br>
+            <span class="highlight">Tahap Proses.</span>
+        </p>
+
+        <a href="https://instagram.com/retreatpptippbp" class="btn-instagram" target="_blank">
+            Cek Update di Instagram
+        </a>
+
+        <p class="footer-note">
+            Sampai jumpa di Acara Restored by God!
+        </p>
+    </div>
 
 </body>
 </html>
